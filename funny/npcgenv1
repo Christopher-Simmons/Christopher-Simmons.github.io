@@ -1,0 +1,1266 @@
+//to do list
+// account for when player or npc has 0 health and end fight
+//create dataset to input
+//create iterative loop to call the generate button to start, no need to disply
+//once generate button is called, to iterate through each player and make it fight
+//loop
+//spit out data to console.table
+
+
+var loopData = [];
+var outputData = [];
+var pEndHealth = 0;
+var npcEndHealth = 0;
+
+var headers = [
+							"",
+						"#PlayerWins",
+						"#npcWins",
+						"pStrength",
+						"pdefense",
+						"pSpeed",
+						"pDexterity",
+						"pWeapon",
+						"pWacc", 
+						"pArmor",
+						"pStealth",
+						"npcStrength",
+						"npcDefense",
+						"npcSpeed",
+						"npcDexterity",
+						"npcWeapon",
+						"npcWacc", 
+						"npcArmor",
+						"npcStealth",
+						"missCount",
+						"hitCount",
+	"npcHealth",
+	"pHealth"
+						];	
+outputData.push(headers);
+
+var hitCount = 0;
+var missCount = 0;
+var flameThrower = {
+	damage:52,
+	accuracy:69,
+	stealth:2,
+	name:'flame thrower'
+};
+var assaultRifle = {
+	damage:44,
+	accuracy:70,
+	stealth:8,
+	name:'assault rifle'
+};
+var bow = {
+	damage:34,
+	accuracy:60,
+	stealth:20,
+	name:'bow'
+};
+var shotgun = {
+	damage:36,
+	accuracy:65,
+	stealth:8,
+	name:'shotgun'
+};
+
+var thunder = {
+    strength: 554.9186,
+    defense: 136.5433,
+	  speed: 223.2439,
+	  dexterity: 224.1639,
+		total: 1138.8697,
+	  weapon: 84,
+	  wacc: 80,
+	  armor: 34,
+	  stealth: 8,
+	  health: 220,
+		level: 6,
+	  name:'ThunderGunExpress',
+		weaponName: 'Space Gun'
+	  
+};
+var maser = {
+    strength: 1000.2270,
+    defense: 506.2704,
+	  speed: 205.1590,
+	  dexterity: 203.3519,
+		total: 1915.0083,
+	  weapon: 80,
+	  wacc: 50,
+	  armor: 34,
+	  stealth: 4,
+	  health: 200,
+		level: 6,
+	  name:'Maser',
+		weaponName: 'Jack Hammer'
+};
+var sightings = {
+    strength: 1030.217,
+    defense: 1000.8978,
+	  speed: 510.0262,
+	  dexterity: 1010.3301,
+		total: 3551.4711,
+	  weapon: 78,
+	  wacc: 65,
+	  armor: 34,
+	  stealth:8,
+		health:250,
+		level: 7,
+	  name:'Sightings',
+		weaponName: 'Magnum'
+};
+var tman23 = {
+    strength: 666.0033,
+    defense: 308.0764,
+	  speed: 314.7574,
+	  dexterity: 345.8719,
+		total: 1634.709,
+	  weapon: 78,
+	  wacc: 65,
+	  armor: 34,
+	  stealth:8,
+		health:220,
+		level: 6,
+	  name:'Tman23',
+		weaponName: 'Magnum'
+}
+var epicPlayer = {
+		strength: 1515.2226,
+    defense: 1000.8978,
+	  speed: 510.0262,
+	  dexterity: 2014.4593,
+		total: 5040.6059,
+	  weapon: 78,
+	  wacc: 65,
+	  armor: 34,
+	  stealth:8,
+		health:260,
+		level: 6,
+	  name:'I AM EPIC',
+		weaponName: 'Magnum'
+}
+var lirznbc = { strength: 496,defense: 1457,speed: 1255,dexterity: 606,total: 3814,weapon: 21,wacc: 52,armor: 33,stealth: 3,health: 100,level: 7,name: 'lirznbc',weaponName: 'flamethrower'}
+var yvxsuya = { strength: 629,defense: 291,speed: 1100,dexterity: 909,total: 2929,weapon: 47,wacc: 48,armor: 18,stealth: 5,health: 120,level: 7,name: 'yvxsuya',weaponName: 'assaultRifle'}
+var lpfqqgo = { strength: 834,defense: 49,speed: 620,dexterity: 881,total: 2384,weapon: 56,wacc: 40,armor: 49,stealth: 7,health: 240,level: 1,name: 'lpfqqgo',weaponName: 'bow'}
+var trlknbt = { strength: 759,defense: 977,speed: 38,dexterity: 432,total: 2206,weapon: 22,wacc: 49,armor: 14,stealth: 4,health: 140,level: 5,name: 'trlknbt',weaponName: 'shotgun'}
+var joolshk = { strength: 1055,defense: 782,speed: 857,dexterity: 1428,total: 4122,weapon: 4,wacc: 58,armor: 48,stealth: 10,health: 120,level: 1,name: 'joolshk',weaponName: 'flamethrower'}
+var qfivkvf = { strength: 329,defense: 69,speed: 1340,dexterity: 284,total: 2022,weapon: 29,wacc: 29,armor: 49,stealth: 7,health: 220,level: 4,name: 'qfivkvf',weaponName: 'assaultRifle'}
+var rkxwogh = { strength: 693,defense: 1323,speed: 857,dexterity: 1181,total: 4054,weapon: 75,wacc: 29,armor: 28,stealth: 3,health: 180,level: 2,name: 'rkxwogh',weaponName: 'bow'}
+var bgcaoqk = { strength: 99,defense: 41,speed: 1121,dexterity: 951,total: 2212,weapon: 78,wacc: 11,armor: 28,stealth: 10,health: 270,level: 4,name: 'bgcaoqk',weaponName: 'shotgun'}
+var jldebch = { strength: 837,defense: 488,speed: 970,dexterity: 1190,total: 3485,weapon: 6,wacc: 12,armor: 46,stealth: 4,health: 230,level: 6,name: 'jldebch',weaponName: 'flamethrower'}
+var zwsgymb = { strength: 1493,defense: 121,speed: 454,dexterity: 864,total: 2932,weapon: 27,wacc: 62,armor: 49,stealth: 3,health: 270,level: 7,name: 'zwsgymb',weaponName: 'assaultRifle'}
+var ufrvzgo = { strength: 74,defense: 1221,speed: 1281,dexterity: 716,total: 3292,weapon: 5,wacc: 53,armor: 22,stealth: 5,health: 120,level: 1,name: 'ufrvzgo',weaponName: 'bow'}
+var goaryfw = { strength: 1414,defense: 825,speed: 44,dexterity: 219,total: 2502,weapon: 15,wacc: 61,armor: 7,stealth: 2,health: 190,level: 6,name: 'goaryfw',weaponName: 'shotgun'}
+var rgnbtuz = { strength: 186,defense: 396,speed: 700,dexterity: 1308,total: 2590,weapon: 46,wacc: 3,armor: 36,stealth: 2,health: 150,level: 4,name: 'rgnbtuz',weaponName: 'flamethrower'}
+var xpvjlan = { strength: 928,defense: 1100,speed: 601,dexterity: 1086,total: 3715,weapon: 63,wacc: 41,armor: 50,stealth: 9,health: 230,level: 4,name: 'xpvjlan',weaponName: 'assaultRifle'}
+var zclsgyd = { strength: 62,defense: 76,speed: 491,dexterity: 1230,total: 1859,weapon: 16,wacc: 61,armor: 38,stealth: 10,health: 130,level: 6,name: 'zclsgyd',weaponName: 'bow'}
+var pibwstm = { strength: 1478,defense: 1055,speed: 1155,dexterity: 634,total: 4322,weapon: 22,wacc: 44,armor: 25,stealth: 2,health: 110,level: 4,name: 'pibwstm',weaponName: 'shotgun'}
+var mlqkuwk = { strength: 977,defense: 1067,speed: 179,dexterity: 1051,total: 3274,weapon: 27,wacc: 65,armor: 39,stealth: 6,health: 250,level: 1,name: 'mlqkuwk',weaponName: 'flamethrower'}
+var yrfsyte = { strength: 855,defense: 5,speed: 514,dexterity: 1493,total: 2867,weapon: 27,wacc: 44,armor: 25,stealth: 3,health: 130,level: 5,name: 'yrfsyte',weaponName: 'assaultRifle'}
+var lkkjkmg = { strength: 217,defense: 1471,speed: 1380,dexterity: 1442,total: 4510,weapon: 48,wacc: 63,armor: 32,stealth: 9,health: 240,level: 7,name: 'lkkjkmg',weaponName: 'bow'}
+var qpolkec = { strength: 36,defense: 1280,speed: 168,dexterity: 430,total: 1914,weapon: 21,wacc: 4,armor: 6,stealth: 5,health: 190,level: 6,name: 'qpolkec',weaponName: 'shotgun'}
+var qntvjmt = { strength: 594,defense: 120,speed: 444,dexterity: 660,total: 1818,weapon: 7,wacc: 1,armor: 12,stealth: 6,health: 110,level: 3,name: 'qntvjmt',weaponName: 'flamethrower'}
+var nwscyll = { strength: 129,defense: 1250,speed: 813,dexterity: 267,total: 2459,weapon: 43,wacc: 27,armor: 50,stealth: 4,health: 250,level: 5,name: 'nwscyll',weaponName: 'assaultRifle'}
+var odajnyl = { strength: 905,defense: 277,speed: 402,dexterity: 163,total: 1747,weapon: 36,wacc: 54,armor: 33,stealth: 5,health: 270,level: 5,name: 'odajnyl',weaponName: 'bow'}
+var wbucpaz = { strength: 372,defense: 965,speed: 1025,dexterity: 214,total: 2576,weapon: 71,wacc: 18,armor: 6,stealth: 9,health: 210,level: 5,name: 'wbucpaz',weaponName: 'shotgun'}
+var apthnzc = { strength: 242,defense: 1258,speed: 600,dexterity: 78,total: 2178,weapon: 27,wacc: 27,armor: 38,stealth: 2,health: 200,level: 5,name: 'apthnzc',weaponName: 'flamethrower'}
+var nnqcvjx = { strength: 868,defense: 665,speed: 1220,dexterity: 6,total: 2759,weapon: 41,wacc: 26,armor: 27,stealth: 3,health: 190,level: 3,name: 'nnqcvjx',weaponName: 'assaultRifle'}
+var hglbhoz = { strength: 108,defense: 1042,speed: 472,dexterity: 1143,total: 2765,weapon: 54,wacc: 46,armor: 8,stealth: 1,health: 250,level: 5,name: 'hglbhoz',weaponName: 'bow'}
+var mfnstxu = { strength: 943,defense: 527,speed: 115,dexterity: 759,total: 2344,weapon: 54,wacc: 17,armor: 15,stealth: 6,health: 160,level: 1,name: 'mfnstxu',weaponName: 'shotgun'}
+var zyeoffo = { strength: 347,defense: 865,speed: 1491,dexterity: 1219,total: 3922,weapon: 39,wacc: 17,armor: 3,stealth: 3,health: 170,level: 7,name: 'zyeoffo',weaponName: 'flamethrower'}
+var bqovoel = { strength: 877,defense: 1462,speed: 1048,dexterity: 388,total: 3775,weapon: 46,wacc: 23,armor: 20,stealth: 9,health: 280,level: 1,name: 'bqovoel',weaponName: 'assaultRifle'}
+var mqvxmnn = { strength: 305,defense: 771,speed: 656,dexterity: 484,total: 2216,weapon: 54,wacc: 56,armor: 50,stealth: 9,health: 130,level: 3,name: 'mqvxmnn',weaponName: 'bow'}
+var bmwmkjo = { strength: 443,defense: 158,speed: 365,dexterity: 650,total: 1616,weapon: 6,wacc: 27,armor: 28,stealth: 9,health: 110,level: 1,name: 'bmwmkjo',weaponName: 'shotgun'}
+var sdzzcfz = { strength: 402,defense: 396,speed: 290,dexterity: 405,total: 1493,weapon: 64,wacc: 36,armor: 27,stealth: 1,health: 150,level: 2,name: 'sdzzcfz',weaponName: 'flamethrower'}
+var iniwtyu = { strength: 215,defense: 296,speed: 668,dexterity: 331,total: 1510,weapon: 64,wacc: 39,armor: 23,stealth: 5,health: 190,level: 7,name: 'iniwtyu',weaponName: 'assaultRifle'}
+var acmpttm = { strength: 864,defense: 891,speed: 932,dexterity: 401,total: 3088,weapon: 14,wacc: 55,armor: 46,stealth: 3,health: 100,level: 2,name: 'acmpttm',weaponName: 'bow'}
+var ahodlsf = { strength: 1121,defense: 94,speed: 1233,dexterity: 1049,total: 3497,weapon: 29,wacc: 4,armor: 20,stealth: 5,health: 260,level: 3,name: 'ahodlsf',weaponName: 'shotgun'}
+var kllljnb = { strength: 760,defense: 582,speed: 331,dexterity: 260,total: 1933,weapon: 21,wacc: 31,armor: 42,stealth: 7,health: 130,level: 3,name: 'kllljnb',weaponName: 'flamethrower'}
+var frcpjvb = { strength: 145,defense: 896,speed: 299,dexterity: 685,total: 2025,weapon: 22,wacc: 48,armor: 10,stealth: 5,health: 260,level: 6,name: 'frcpjvb',weaponName: 'assaultRifle'}
+var zfevyrr = { strength: 871,defense: 317,speed: 832,dexterity: 395,total: 2415,weapon: 83,wacc: 8,armor: 23,stealth: 5,health: 140,level: 4,name: 'zfevyrr',weaponName: 'bow'}
+var vzppxos = { strength: 974,defense: 956,speed: 1179,dexterity: 139,total: 3248,weapon: 65,wacc: 26,armor: 10,stealth: 6,health: 110,level: 5,name: 'vzppxos',weaponName: 'shotgun'}
+var fcqzwhu = { strength: 1206,defense: 382,speed: 1337,dexterity: 1356,total: 4281,weapon: 46,wacc: 48,armor: 46,stealth: 5,health: 140,level: 4,name: 'fcqzwhu',weaponName: 'flamethrower'}
+var vjodqhr = { strength: 732,defense: 235,speed: 710,dexterity: 681,total: 2358,weapon: 55,wacc: 27,armor: 28,stealth: 10,health: 160,level: 4,name: 'vjodqhr',weaponName: 'assaultRifle'}
+var revggdq = { strength: 1206,defense: 1035,speed: 1482,dexterity: 143,total: 3866,weapon: 66,wacc: 19,armor: 35,stealth: 5,health: 130,level: 7,name: 'revggdq',weaponName: 'bow'}
+var vvluiln = { strength: 143,defense: 1489,speed: 167,dexterity: 130,total: 1929,weapon: 64,wacc: 34,armor: 48,stealth: 2,health: 110,level: 5,name: 'vvluiln',weaponName: 'shotgun'}
+var kgvaabh = { strength: 695,defense: 88,speed: 609,dexterity: 312,total: 1704,weapon: 29,wacc: 29,armor: 27,stealth: 1,health: 240,level: 3,name: 'kgvaabh',weaponName: 'flamethrower'}
+var uxqdjfx = { strength: 346,defense: 710,speed: 857,dexterity: 1100,total: 3013,weapon: 4,wacc: 19,armor: 6,stealth: 7,health: 220,level: 7,name: 'uxqdjfx',weaponName: 'assaultRifle'}
+var svcqyff = { strength: 783,defense: 711,speed: 584,dexterity: 536,total: 2614,weapon: 4,wacc: 16,armor: 25,stealth: 9,health: 260,level: 3,name: 'svcqyff',weaponName: 'bow'}
+var rejrsvt = { strength: 922,defense: 265,speed: 1316,dexterity: 315,total: 2818,weapon: 64,wacc: 8,armor: 4,stealth: 5,health: 100,level: 3,name: 'rejrsvt',weaponName: 'shotgun'}
+var cebrmwe = { strength: 638,defense: 149,speed: 1021,dexterity: 719,total: 2527,weapon: 31,wacc: 34,armor: 31,stealth: 3,health: 110,level: 6,name: 'cebrmwe',weaponName: 'flamethrower'}
+var tohtdfq = { strength: 1452,defense: 1134,speed: 631,dexterity: 566,total: 3783,weapon: 6,wacc: 30,armor: 38,stealth: 8,health: 180,level: 2,name: 'tohtdfq',weaponName: 'assaultRifle'}
+var schbgxy = { strength: 1201,defense: 48,speed: 496,dexterity: 576,total: 2321,weapon: 11,wacc: 38,armor: 2,stealth: 8,health: 150,level: 4,name: 'schbgxy',weaponName: 'bow'}
+var ikzbkwx = { strength: 1142,defense: 587,speed: 260,dexterity: 414,total: 2403,weapon: 20,wacc: 14,armor: 32,stealth: 9,health: 240,level: 7,name: 'ikzbkwx',weaponName: 'shotgun'}
+var ywdyvph = { strength: 809,defense: 695,speed: 620,dexterity: 1016,total: 3140,weapon: 80,wacc: 43,armor: 29,stealth: 10,health: 100,level: 6,name: 'ywdyvph',weaponName: 'flamethrower'}
+var cdxnibf = { strength: 144,defense: 1106,speed: 1371,dexterity: 262,total: 2883,weapon: 29,wacc: 47,armor: 32,stealth: 10,health: 110,level: 4,name: 'cdxnibf',weaponName: 'assaultRifle'}
+var xxtxvaz = { strength: 615,defense: 872,speed: 827,dexterity: 270,total: 2584,weapon: 78,wacc: 5,armor: 8,stealth: 3,health: 220,level: 7,name: 'xxtxvaz',weaponName: 'bow'}
+var uofivpy = { strength: 653,defense: 1475,speed: 1115,dexterity: 169,total: 3412,weapon: 67,wacc: 24,armor: 28,stealth: 4,health: 230,level: 3,name: 'uofivpy',weaponName: 'shotgun'}
+var gbcirym = { strength: 1297,defense: 34,speed: 261,dexterity: 588,total: 2180,weapon: 44,wacc: 2,armor: 27,stealth: 2,health: 190,level: 1,name: 'gbcirym',weaponName: 'flamethrower'}
+var apxqqmo = { strength: 463,defense: 600,speed: 389,dexterity: 1351,total: 2803,weapon: 39,wacc: 50,armor: 13,stealth: 4,health: 270,level: 5,name: 'apxqqmo',weaponName: 'assaultRifle'}
+var aczhqax = { strength: 541,defense: 6,speed: 1239,dexterity: 1034,total: 2820,weapon: 80,wacc: 28,armor: 30,stealth: 5,health: 260,level: 7,name: 'aczhqax',weaponName: 'bow'}
+var pkstjzq = { strength: 743,defense: 1317,speed: 47,dexterity: 122,total: 2229,weapon: 10,wacc: 25,armor: 40,stealth: 7,health: 170,level: 7,name: 'pkstjzq',weaponName: 'shotgun'}
+var vaqurxh = { strength: 573,defense: 925,speed: 51,dexterity: 1384,total: 2933,weapon: 34,wacc: 18,armor: 29,stealth: 4,health: 260,level: 7,name: 'vaqurxh',weaponName: 'flamethrower'}
+var pqtawso = { strength: 404,defense: 538,speed: 995,dexterity: 147,total: 2084,weapon: 31,wacc: 6,armor: 47,stealth: 6,health: 230,level: 5,name: 'pqtawso',weaponName: 'assaultRifle'}
+var hrrvqtx = { strength: 993,defense: 1369,speed: 1039,dexterity: 456,total: 3857,weapon: 18,wacc: 58,armor: 35,stealth: 3,health: 230,level: 3,name: 'hrrvqtx',weaponName: 'bow'}
+var hywebrb = { strength: 1335,defense: 334,speed: 1239,dexterity: 772,total: 3680,weapon: 59,wacc: 31,armor: 19,stealth: 7,health: 150,level: 3,name: 'hywebrb',weaponName: 'shotgun'}
+var ixapbzg = { strength: 620,defense: 1389,speed: 348,dexterity: 842,total: 3199,weapon: 53,wacc: 15,armor: 49,stealth: 2,health: 110,level: 1,name: 'ixapbzg',weaponName: 'flamethrower'}
+var xvmyqdr = { strength: 564,defense: 1234,speed: 1033,dexterity: 168,total: 2999,weapon: 47,wacc: 13,armor: 39,stealth: 7,health: 200,level: 2,name: 'xvmyqdr',weaponName: 'assaultRifle'}
+var bcptksp = { strength: 106,defense: 550,speed: 465,dexterity: 1409,total: 2530,weapon: 28,wacc: 54,armor: 21,stealth: 9,health: 110,level: 1,name: 'bcptksp',weaponName: 'bow'}
+var wuabktq = { strength: 351,defense: 1013,speed: 945,dexterity: 222,total: 2531,weapon: 74,wacc: 54,armor: 7,stealth: 1,health: 250,level: 2,name: 'wuabktq',weaponName: 'shotgun'}
+var xdpizji = { strength: 218,defense: 1346,speed: 1227,dexterity: 777,total: 3568,weapon: 85,wacc: 28,armor: 41,stealth: 6,health: 270,level: 2,name: 'xdpizji',weaponName: 'flamethrower'}
+var jhzlsnx = { strength: 619,defense: 13,speed: 883,dexterity: 411,total: 1926,weapon: 63,wacc: 60,armor: 44,stealth: 2,health: 100,level: 1,name: 'jhzlsnx',weaponName: 'assaultRifle'}
+var qxvovke = { strength: 975,defense: 227,speed: 595,dexterity: 325,total: 2122,weapon: 25,wacc: 36,armor: 38,stealth: 6,health: 280,level: 7,name: 'qxvovke',weaponName: 'bow'}
+var tfndtgj = { strength: 1174,defense: 1185,speed: 264,dexterity: 723,total: 3346,weapon: 80,wacc: 38,armor: 24,stealth: 1,health: 100,level: 2,name: 'tfndtgj',weaponName: 'shotgun'}
+var fgubpuw = { strength: 526,defense: 279,speed: 709,dexterity: 518,total: 2032,weapon: 80,wacc: 2,armor: 22,stealth: 5,health: 260,level: 1,name: 'fgubpuw',weaponName: 'flamethrower'}
+var ucvxttw = { strength: 564,defense: 142,speed: 1406,dexterity: 1187,total: 3299,weapon: 4,wacc: 63,armor: 43,stealth: 4,health: 180,level: 4,name: 'ucvxttw',weaponName: 'assaultRifle'}
+var jokjfdf = { strength: 214,defense: 882,speed: 1336,dexterity: 397,total: 2829,weapon: 26,wacc: 25,armor: 26,stealth: 8,health: 160,level: 1,name: 'jokjfdf',weaponName: 'bow'}
+var ekpsbwv = { strength: 638,defense: 1452,speed: 853,dexterity: 313,total: 3256,weapon: 9,wacc: 10,armor: 9,stealth: 6,health: 160,level: 7,name: 'ekpsbwv',weaponName: 'shotgun'}
+var xtjmnic = { strength: 962,defense: 1478,speed: 1409,dexterity: 136,total: 3985,weapon: 69,wacc: 17,armor: 26,stealth: 2,health: 120,level: 6,name: 'xtjmnic',weaponName: 'flamethrower'}
+var bjfuqzs = { strength: 103,defense: 1413,speed: 61,dexterity: 1412,total: 2989,weapon: 40,wacc: 27,armor: 23,stealth: 3,health: 100,level: 7,name: 'bjfuqzs',weaponName: 'assaultRifle'}
+var dxyxtvx = { strength: 743,defense: 64,speed: 112,dexterity: 92,total: 1011,weapon: 35,wacc: 16,armor: 12,stealth: 9,health: 250,level: 6,name: 'dxyxtvx',weaponName: 'bow'}
+var hseytep = { strength: 340,defense: 587,speed: 388,dexterity: 995,total: 2310,weapon: 71,wacc: 32,armor: 32,stealth: 2,health: 100,level: 6,name: 'hseytep',weaponName: 'shotgun'}
+var fyipend = { strength: 46,defense: 1319,speed: 768,dexterity: 805,total: 2938,weapon: 57,wacc: 11,armor: 29,stealth: 10,health: 170,level: 7,name: 'fyipend',weaponName: 'flamethrower'}
+var pmtqyqx = { strength: 1138,defense: 153,speed: 730,dexterity: 1013,total: 3034,weapon: 33,wacc: 25,armor: 29,stealth: 8,health: 160,level: 4,name: 'pmtqyqx',weaponName: 'assaultRifle'}
+var zimxatj = { strength: 1367,defense: 1067,speed: 331,dexterity: 339,total: 3104,weapon: 5,wacc: 51,armor: 22,stealth: 7,health: 270,level: 4,name: 'zimxatj',weaponName: 'bow'}
+var avwguqv = { strength: 1162,defense: 302,speed: 354,dexterity: 152,total: 1970,weapon: 18,wacc: 16,armor: 33,stealth: 9,health: 140,level: 7,name: 'avwguqv',weaponName: 'shotgun'}
+var uvetblw = { strength: 155,defense: 1346,speed: 1129,dexterity: 1295,total: 3925,weapon: 12,wacc: 18,armor: 45,stealth: 10,health: 170,level: 7,name: 'uvetblw',weaponName: 'flamethrower'}
+var idysyvy = { strength: 727,defense: 1075,speed: 15,dexterity: 963,total: 2780,weapon: 6,wacc: 35,armor: 13,stealth: 8,health: 160,level: 2,name: 'idysyvy',weaponName: 'assaultRifle'}
+var phkyian = { strength: 120,defense: 205,speed: 981,dexterity: 23,total: 1329,weapon: 49,wacc: 46,armor: 45,stealth: 2,health: 220,level: 1,name: 'phkyian',weaponName: 'bow'}
+var rgauqir = { strength: 176,defense: 209,speed: 1308,dexterity: 928,total: 2621,weapon: 74,wacc: 37,armor: 11,stealth: 7,health: 190,level: 2,name: 'rgauqir',weaponName: 'shotgun'}
+var whedlrl = { strength: 538,defense: 1228,speed: 1249,dexterity: 719,total: 3734,weapon: 21,wacc: 44,armor: 16,stealth: 6,health: 280,level: 5,name: 'whedlrl',weaponName: 'flamethrower'}
+var bdluffr = { strength: 968,defense: 135,speed: 957,dexterity: 897,total: 2957,weapon: 61,wacc: 33,armor: 23,stealth: 10,health: 160,level: 7,name: 'bdluffr',weaponName: 'assaultRifle'}
+var houxdyf = { strength: 1065,defense: 197,speed: 1416,dexterity: 1171,total: 3849,weapon: 5,wacc: 9,armor: 28,stealth: 3,health: 260,level: 6,name: 'houxdyf',weaponName: 'bow'}
+var zoybtkc = { strength: 576,defense: 1485,speed: 204,dexterity: 41,total: 2306,weapon: 70,wacc: 8,armor: 28,stealth: 10,health: 230,level: 2,name: 'zoybtkc',weaponName: 'shotgun'}
+var pzquwsw = { strength: 979,defense: 964,speed: 1458,dexterity: 254,total: 3655,weapon: 40,wacc: 10,armor: 39,stealth: 6,health: 120,level: 6,name: 'pzquwsw',weaponName: 'flamethrower'}
+var zackpbt = { strength: 952,defense: 855,speed: 1138,dexterity: 711,total: 3656,weapon: 30,wacc: 29,armor: 26,stealth: 4,health: 180,level: 6,name: 'zackpbt',weaponName: 'assaultRifle'}
+var bxdayno = { strength: 68,defense: 1494,speed: 727,dexterity: 1425,total: 3714,weapon: 3,wacc: 22,armor: 48,stealth: 5,health: 260,level: 3,name: 'bxdayno',weaponName: 'bow'}
+var rdefncw = { strength: 1052,defense: 1254,speed: 993,dexterity: 1228,total: 4527,weapon: 30,wacc: 64,armor: 22,stealth: 4,health: 240,level: 7,name: 'rdefncw',weaponName: 'shotgun'}
+var jofkhew = { strength: 222,defense: 1402,speed: 535,dexterity: 1097,total: 3256,weapon: 53,wacc: 3,armor: 2,stealth: 10,health: 240,level: 3,name: 'jofkhew',weaponName: 'flamethrower'}
+var gtepglv = { strength: 1433,defense: 523,speed: 853,dexterity: 1016,total: 3825,weapon: 34,wacc: 39,armor: 4,stealth: 7,health: 120,level: 4,name: 'gtepglv',weaponName: 'assaultRifle'}
+var sjmoegl = { strength: 434,defense: 591,speed: 318,dexterity: 1197,total: 2540,weapon: 17,wacc: 8,armor: 36,stealth: 7,health: 100,level: 3,name: 'sjmoegl',weaponName: 'bow'}
+var zagplkz = { strength: 592,defense: 947,speed: 301,dexterity: 638,total: 2478,weapon: 34,wacc: 57,armor: 6,stealth: 4,health: 120,level: 5,name: 'zagplkz',weaponName: 'shotgun'}
+var bamlffd = { strength: 655,defense: 1487,speed: 1241,dexterity: 1362,total: 4745,weapon: 31,wacc: 42,armor: 43,stealth: 5,health: 100,level: 2,name: 'bamlffd',weaponName: 'flamethrower'}
+var ffmlbfi = { strength: 267,defense: 718,speed: 798,dexterity: 1410,total: 3193,weapon: 78,wacc: 11,armor: 18,stealth: 9,health: 130,level: 1,name: 'ffmlbfi',weaponName: 'assaultRifle'}
+var ftqezyx = { strength: 841,defense: 247,speed: 46,dexterity: 739,total: 1873,weapon: 31,wacc: 15,armor: 8,stealth: 7,health: 200,level: 1,name: 'ftqezyx',weaponName: 'bow'}
+var mkwkpcw = { strength: 1080,defense: 1176,speed: 607,dexterity: 892,total: 3755,weapon: 19,wacc: 65,armor: 19,stealth: 8,health: 230,level: 6,name: 'mkwkpcw',weaponName: 'shotgun'}
+var tbvphvr = { strength: 12,defense: 981,speed: 580,dexterity: 1022,total: 2595,weapon: 60,wacc: 57,armor: 17,stealth: 4,health: 100,level: 6,name: 'tbvphvr',weaponName: 'flamethrower'}
+var pfkmcms = { strength: 730,defense: 501,speed: 649,dexterity: 1388,total: 3268,weapon: 79,wacc: 48,armor: 30,stealth: 7,health: 140,level: 3,name: 'pfkmcms',weaponName: 'assaultRifle'}
+var tzlmket = { strength: 251,defense: 1471,speed: 918,dexterity: 567,total: 3207,weapon: 9,wacc: 40,armor: 13,stealth: 5,health: 230,level: 3,name: 'tzlmket',weaponName: 'bow'}
+var amxaohe = { strength: 461,defense: 641,speed: 1473,dexterity: 965,total: 3540,weapon: 49,wacc: 60,armor: 38,stealth: 3,health: 270,level: 3,name: 'amxaohe',weaponName: 'shotgun'}
+var vqekbjv = { strength: 771,defense: 410,speed: 266,dexterity: 218,total: 1665,weapon: 41,wacc: 55,armor: 36,stealth: 2,health: 140,level: 3,name: 'vqekbjv',weaponName: 'flamethrower'}
+var upfhyub = { strength: 1251,defense: 551,speed: 328,dexterity: 1099,total: 3229,weapon: 79,wacc: 23,armor: 34,stealth: 4,health: 200,level: 6,name: 'upfhyub',weaponName: 'assaultRifle'}
+var axdohpk = { strength: 683,defense: 528,speed: 1153,dexterity: 230,total: 2594,weapon: 50,wacc: 54,armor: 49,stealth: 8,health: 130,level: 4,name: 'axdohpk',weaponName: 'bow'}
+var kvlnibb = { strength: 1448,defense: 1087,speed: 1336,dexterity: 127,total: 3998,weapon: 10,wacc: 3,armor: 49,stealth: 5,health: 260,level: 2,name: 'kvlnibb',weaponName: 'shotgun'}
+var zpwrwlp = { strength: 93,defense: 1488,speed: 104,dexterity: 259,total: 1944,weapon: 55,wacc: 19,armor: 24,stealth: 1,health: 160,level: 7,name: 'zpwrwlp',weaponName: 'flamethrower'}
+var hmaxvgo = { strength: 427,defense: 769,speed: 352,dexterity: 1188,total: 2736,weapon: 78,wacc: 44,armor: 49,stealth: 6,health: 210,level: 5,name: 'hmaxvgo',weaponName: 'assaultRifle'}
+var ekxwpwc = { strength: 1452,defense: 323,speed: 13,dexterity: 228,total: 2016,weapon: 4,wacc: 3,armor: 23,stealth: 4,health: 280,level: 3,name: 'ekxwpwc',weaponName: 'bow'}
+var deqirsu = { strength: 930,defense: 395,speed: 660,dexterity: 490,total: 2475,weapon: 55,wacc: 32,armor: 48,stealth: 8,health: 150,level: 5,name: 'deqirsu',weaponName: 'shotgun'}
+var mfmgrdo = { strength: 486,defense: 706,speed: 716,dexterity: 12,total: 1920,weapon: 48,wacc: 14,armor: 10,stealth: 9,health: 280,level: 2,name: 'mfmgrdo',weaponName: 'flamethrower'}
+var vjeplnx = { strength: 793,defense: 308,speed: 1438,dexterity: 263,total: 2802,weapon: 29,wacc: 42,armor: 15,stealth: 2,health: 150,level: 5,name: 'vjeplnx',weaponName: 'assaultRifle'}
+var jndozqo = { strength: 664,defense: 637,speed: 500,dexterity: 606,total: 2407,weapon: 79,wacc: 10,armor: 20,stealth: 6,health: 210,level: 1,name: 'jndozqo',weaponName: 'bow'}
+var xpszmqw = { strength: 985,defense: 439,speed: 532,dexterity: 855,total: 2811,weapon: 29,wacc: 54,armor: 3,stealth: 5,health: 220,level: 1,name: 'xpszmqw',weaponName: 'shotgun'}
+var paqigph = { strength: 595,defense: 499,speed: 520,dexterity: 1197,total: 2811,weapon: 63,wacc: 29,armor: 14,stealth: 8,health: 230,level: 3,name: 'paqigph',weaponName: 'flamethrower'}
+var vvbxjzv = { strength: 748,defense: 479,speed: 1297,dexterity: 596,total: 3120,weapon: 43,wacc: 20,armor: 33,stealth: 7,health: 100,level: 7,name: 'vvbxjzv',weaponName: 'assaultRifle'}
+var jirswty = { strength: 453,defense: 1085,speed: 1418,dexterity: 490,total: 3446,weapon: 67,wacc: 35,armor: 3,stealth: 10,health: 220,level: 2,name: 'jirswty',weaponName: 'bow'}
+var txsqdtw = { strength: 1312,defense: 324,speed: 345,dexterity: 296,total: 2277,weapon: 6,wacc: 2,armor: 20,stealth: 8,health: 220,level: 5,name: 'txsqdtw',weaponName: 'shotgun'}
+var ygjxdhl = { strength: 264,defense: 412,speed: 569,dexterity: 1018,total: 2263,weapon: 77,wacc: 10,armor: 40,stealth: 10,health: 160,level: 7,name: 'ygjxdhl',weaponName: 'flamethrower'}
+var sfyqaam = { strength: 595,defense: 680,speed: 234,dexterity: 1325,total: 2834,weapon: 56,wacc: 41,armor: 35,stealth: 6,health: 230,level: 3,name: 'sfyqaam',weaponName: 'assaultRifle'}
+var ypcjgsi = { strength: 100,defense: 314,speed: 1031,dexterity: 1200,total: 2645,weapon: 33,wacc: 42,armor: 1,stealth: 5,health: 150,level: 1,name: 'ypcjgsi',weaponName: 'bow'}
+var katmtbo = { strength: 975,defense: 1110,speed: 477,dexterity: 1290,total: 3852,weapon: 46,wacc: 38,armor: 20,stealth: 2,health: 100,level: 2,name: 'katmtbo',weaponName: 'shotgun'}
+var eahsyen = { strength: 48,defense: 56,speed: 108,dexterity: 1123,total: 1335,weapon: 80,wacc: 48,armor: 16,stealth: 2,health: 140,level: 1,name: 'eahsyen',weaponName: 'flamethrower'}
+var fyjntwi = { strength: 1024,defense: 1188,speed: 429,dexterity: 1281,total: 3922,weapon: 61,wacc: 48,armor: 41,stealth: 3,health: 130,level: 1,name: 'fyjntwi',weaponName: 'assaultRifle'}
+var ovlbtww = { strength: 1377,defense: 545,speed: 128,dexterity: 1318,total: 3368,weapon: 40,wacc: 19,armor: 5,stealth: 7,health: 100,level: 3,name: 'ovlbtww',weaponName: 'bow'}
+var qstgtby = { strength: 1006,defense: 1500,speed: 204,dexterity: 907,total: 3617,weapon: 18,wacc: 38,armor: 6,stealth: 5,health: 150,level: 4,name: 'qstgtby',weaponName: 'shotgun'}
+var flmtczh = { strength: 1395,defense: 548,speed: 167,dexterity: 397,total: 2507,weapon: 77,wacc: 4,armor: 25,stealth: 10,health: 180,level: 7,name: 'flmtczh',weaponName: 'flamethrower'}
+var enxbydy = { strength: 725,defense: 708,speed: 586,dexterity: 982,total: 3001,weapon: 67,wacc: 19,armor: 33,stealth: 2,health: 100,level: 5,name: 'enxbydy',weaponName: 'assaultRifle'}
+var iojfsyb = { strength: 723,defense: 502,speed: 591,dexterity: 192,total: 2008,weapon: 55,wacc: 30,armor: 8,stealth: 10,health: 280,level: 4,name: 'iojfsyb',weaponName: 'bow'}
+var rzuypwv = { strength: 728,defense: 24,speed: 86,dexterity: 4,total: 842,weapon: 84,wacc: 57,armor: 18,stealth: 8,health: 110,level: 7,name: 'rzuypwv',weaponName: 'shotgun'}
+var xrnwxck = { strength: 740,defense: 276,speed: 1479,dexterity: 1454,total: 3949,weapon: 28,wacc: 14,armor: 11,stealth: 1,health: 130,level: 1,name: 'xrnwxck',weaponName: 'flamethrower'}
+var hqvbzyj = { strength: 1304,defense: 1267,speed: 3,dexterity: 883,total: 3457,weapon: 3,wacc: 49,armor: 29,stealth: 8,health: 160,level: 1,name: 'hqvbzyj',weaponName: 'assaultRifle'}
+var vordmkj = { strength: 1411,defense: 1080,speed: 1347,dexterity: 1008,total: 4846,weapon: 32,wacc: 50,armor: 6,stealth: 1,health: 210,level: 3,name: 'vordmkj',weaponName: 'bow'}
+var cippbmw = { strength: 1394,defense: 29,speed: 26,dexterity: 493,total: 1942,weapon: 16,wacc: 18,armor: 44,stealth: 4,health: 260,level: 6,name: 'cippbmw',weaponName: 'shotgun'}
+var oymlvpn = { strength: 382,defense: 237,speed: 177,dexterity: 288,total: 1084,weapon: 72,wacc: 21,armor: 35,stealth: 1,health: 100,level: 2,name: 'oymlvpn',weaponName: 'flamethrower'}
+var pockjat = { strength: 945,defense: 674,speed: 979,dexterity: 148,total: 2746,weapon: 55,wacc: 64,armor: 28,stealth: 4,health: 100,level: 1,name: 'pockjat',weaponName: 'assaultRifle'}
+var tbrmuvj = { strength: 969,defense: 88,speed: 478,dexterity: 107,total: 1642,weapon: 76,wacc: 38,armor: 7,stealth: 8,health: 100,level: 5,name: 'tbrmuvj',weaponName: 'bow'}
+var gqlbvho = { strength: 955,defense: 1116,speed: 1011,dexterity: 1478,total: 4560,weapon: 83,wacc: 17,armor: 18,stealth: 9,health: 210,level: 3,name: 'gqlbvho',weaponName: 'shotgun'}
+var olshbkh = { strength: 1400,defense: 427,speed: 1106,dexterity: 1132,total: 4065,weapon: 21,wacc: 21,armor: 38,stealth: 6,health: 210,level: 3,name: 'olshbkh',weaponName: 'flamethrower'}
+var pcmbjjb = { strength: 1417,defense: 1460,speed: 1371,dexterity: 932,total: 5180,weapon: 2,wacc: 50,armor: 41,stealth: 1,health: 250,level: 5,name: 'pcmbjjb',weaponName: 'assaultRifle'}
+var qbiblzk = { strength: 168,defense: 1272,speed: 1465,dexterity: 527,total: 3432,weapon: 15,wacc: 48,armor: 19,stealth: 8,health: 220,level: 3,name: 'qbiblzk',weaponName: 'bow'}
+var ttlivla = { strength: 1186,defense: 33,speed: 12,dexterity: 627,total: 1858,weapon: 29,wacc: 20,armor: 24,stealth: 6,health: 270,level: 4,name: 'ttlivla',weaponName: 'shotgun'}
+var nqxlldk = { strength: 704,defense: 513,speed: 555,dexterity: 1268,total: 3040,weapon: 26,wacc: 56,armor: 12,stealth: 2,health: 180,level: 4,name: 'nqxlldk',weaponName: 'flamethrower'}
+var pqwazxn = { strength: 14,defense: 65,speed: 365,dexterity: 1336,total: 1780,weapon: 84,wacc: 10,armor: 39,stealth: 1,health: 270,level: 7,name: 'pqwazxn',weaponName: 'assaultRifle'}
+var lmymcan = { strength: 1175,defense: 424,speed: 290,dexterity: 333,total: 2222,weapon: 64,wacc: 47,armor: 33,stealth: 9,health: 130,level: 3,name: 'lmymcan',weaponName: 'bow'}
+var qzjskuv = { strength: 821,defense: 582,speed: 800,dexterity: 960,total: 3163,weapon: 7,wacc: 20,armor: 32,stealth: 6,health: 270,level: 3,name: 'qzjskuv',weaponName: 'shotgun'}
+var sbldzsh = { strength: 1400,defense: 1475,speed: 1305,dexterity: 739,total: 4919,weapon: 11,wacc: 36,armor: 26,stealth: 3,health: 250,level: 1,name: 'sbldzsh',weaponName: 'flamethrower'}
+var zcwxxou = { strength: 811,defense: 812,speed: 762,dexterity: 509,total: 2894,weapon: 63,wacc: 35,armor: 28,stealth: 4,health: 130,level: 2,name: 'zcwxxou',weaponName: 'assaultRifle'}
+var zqgygmn = { strength: 886,defense: 583,speed: 6,dexterity: 1037,total: 2512,weapon: 84,wacc: 32,armor: 2,stealth: 5,health: 240,level: 6,name: 'zqgygmn',weaponName: 'bow'}
+var ndrqrbf = { strength: 1086,defense: 891,speed: 1041,dexterity: 513,total: 3531,weapon: 59,wacc: 50,armor: 25,stealth: 7,health: 220,level: 1,name: 'ndrqrbf',weaponName: 'shotgun'}
+var pfhdoke = { strength: 697,defense: 39,speed: 883,dexterity: 1171,total: 2790,weapon: 3,wacc: 57,armor: 8,stealth: 10,health: 190,level: 3,name: 'pfhdoke',weaponName: 'flamethrower'}
+var myqnfqe = { strength: 532,defense: 1263,speed: 476,dexterity: 874,total: 3145,weapon: 54,wacc: 49,armor: 11,stealth: 7,health: 260,level: 6,name: 'myqnfqe',weaponName: 'assaultRifle'}
+var hquppea = { strength: 1365,defense: 156,speed: 1335,dexterity: 197,total: 3053,weapon: 75,wacc: 57,armor: 50,stealth: 7,health: 260,level: 6,name: 'hquppea',weaponName: 'bow'}
+var dyduizg = { strength: 514,defense: 23,speed: 1469,dexterity: 150,total: 2156,weapon: 13,wacc: 52,armor: 40,stealth: 5,health: 140,level: 6,name: 'dyduizg',weaponName: 'shotgun'}
+var yambtdz = { strength: 1139,defense: 607,speed: 128,dexterity: 673,total: 2547,weapon: 70,wacc: 28,armor: 40,stealth: 1,health: 160,level: 5,name: 'yambtdz',weaponName: 'flamethrower'}
+var tcehxyn = { strength: 1334,defense: 972,speed: 1482,dexterity: 1229,total: 5017,weapon: 51,wacc: 30,armor: 14,stealth: 10,health: 220,level: 1,name: 'tcehxyn',weaponName: 'assaultRifle'}
+var wnfvjwx = { strength: 1393,defense: 760,speed: 1225,dexterity: 706,total: 4084,weapon: 59,wacc: 58,armor: 3,stealth: 6,health: 280,level: 6,name: 'wnfvjwx',weaponName: 'bow'}
+var qafvtkz = { strength: 1321,defense: 705,speed: 153,dexterity: 1161,total: 3340,weapon: 9,wacc: 5,armor: 18,stealth: 6,health: 140,level: 4,name: 'qafvtkz',weaponName: 'shotgun'}
+var cipccce = { strength: 660,defense: 297,speed: 1166,dexterity: 632,total: 2755,weapon: 7,wacc: 22,armor: 11,stealth: 1,health: 100,level: 3,name: 'cipccce',weaponName: 'flamethrower'}
+var watvkvt = { strength: 90,defense: 1430,speed: 1302,dexterity: 855,total: 3677,weapon: 25,wacc: 5,armor: 37,stealth: 4,health: 180,level: 4,name: 'watvkvt',weaponName: 'assaultRifle'}
+var amsazvc = { strength: 1461,defense: 497,speed: 1007,dexterity: 14,total: 2979,weapon: 38,wacc: 35,armor: 38,stealth: 3,health: 220,level: 5,name: 'amsazvc',weaponName: 'bow'}
+var zaaysfu = { strength: 403,defense: 551,speed: 1015,dexterity: 832,total: 2801,weapon: 36,wacc: 65,armor: 18,stealth: 1,health: 160,level: 4,name: 'zaaysfu',weaponName: 'shotgun'}
+var puadbzi = { strength: 49,defense: 1050,speed: 1116,dexterity: 1030,total: 3245,weapon: 20,wacc: 44,armor: 29,stealth: 7,health: 140,level: 1,name: 'puadbzi',weaponName: 'flamethrower'}
+var afaxjel = { strength: 1109,defense: 1470,speed: 1082,dexterity: 469,total: 4130,weapon: 50,wacc: 8,armor: 40,stealth: 2,health: 230,level: 7,name: 'afaxjel',weaponName: 'assaultRifle'}
+var fhyzwyb = { strength: 164,defense: 771,speed: 764,dexterity: 1444,total: 3143,weapon: 65,wacc: 60,armor: 16,stealth: 1,health: 280,level: 5,name: 'fhyzwyb',weaponName: 'bow'}
+var xbjjvji = { strength: 263,defense: 859,speed: 1349,dexterity: 1490,total: 3961,weapon: 14,wacc: 6,armor: 16,stealth: 2,health: 280,level: 5,name: 'xbjjvji',weaponName: 'shotgun'}
+var fcwttln = { strength: 295,defense: 13,speed: 567,dexterity: 913,total: 1788,weapon: 69,wacc: 8,armor: 38,stealth: 6,health: 170,level: 7,name: 'fcwttln',weaponName: 'flamethrower'}
+var bgzwqfl = { strength: 1371,defense: 353,speed: 680,dexterity: 422,total: 2826,weapon: 12,wacc: 10,armor: 43,stealth: 7,health: 220,level: 3,name: 'bgzwqfl',weaponName: 'assaultRifle'}
+var icwkztk = { strength: 616,defense: 1106,speed: 1200,dexterity: 887,total: 3809,weapon: 25,wacc: 28,armor: 17,stealth: 6,health: 170,level: 5,name: 'icwkztk',weaponName: 'bow'}
+var gmlhwpo = { strength: 837,defense: 995,speed: 413,dexterity: 812,total: 3057,weapon: 35,wacc: 36,armor: 11,stealth: 2,health: 110,level: 6,name: 'gmlhwpo',weaponName: 'shotgun'}
+var hltxctg = { strength: 431,defense: 297,speed: 80,dexterity: 1103,total: 1911,weapon: 42,wacc: 40,armor: 32,stealth: 3,health: 210,level: 7,name: 'hltxctg',weaponName: 'flamethrower'}
+var pdqdqjw = { strength: 614,defense: 38,speed: 486,dexterity: 1441,total: 2579,weapon: 62,wacc: 18,armor: 3,stealth: 1,health: 130,level: 6,name: 'pdqdqjw',weaponName: 'assaultRifle'}
+var xxmdxds = { strength: 922,defense: 820,speed: 22,dexterity: 957,total: 2721,weapon: 41,wacc: 6,armor: 9,stealth: 9,health: 280,level: 5,name: 'xxmdxds',weaponName: 'bow'}
+var pvfhdyk = { strength: 652,defense: 554,speed: 165,dexterity: 714,total: 2085,weapon: 47,wacc: 16,armor: 32,stealth: 9,health: 160,level: 3,name: 'pvfhdyk',weaponName: 'shotgun'}
+var cvtteqs = { strength: 809,defense: 553,speed: 1394,dexterity: 1,total: 2757,weapon: 22,wacc: 56,armor: 39,stealth: 1,health: 210,level: 7,name: 'cvtteqs',weaponName: 'flamethrower'}
+var zihorax = { strength: 199,defense: 1017,speed: 1454,dexterity: 1490,total: 4160,weapon: 38,wacc: 3,armor: 1,stealth: 6,health: 200,level: 5,name: 'zihorax',weaponName: 'assaultRifle'}
+var kicqtyr = { strength: 1259,defense: 340,speed: 550,dexterity: 741,total: 2890,weapon: 2,wacc: 13,armor: 14,stealth: 7,health: 270,level: 6,name: 'kicqtyr',weaponName: 'bow'}
+var apcwovo = { strength: 790,defense: 352,speed: 160,dexterity: 56,total: 1358,weapon: 65,wacc: 32,armor: 29,stealth: 6,health: 120,level: 6,name: 'apcwovo',weaponName: 'shotgun'}
+var uhofwsd = { strength: 640,defense: 699,speed: 101,dexterity: 1105,total: 2545,weapon: 21,wacc: 4,armor: 1,stealth: 8,health: 220,level: 4,name: 'uhofwsd',weaponName: 'flamethrower'}
+var xfftqhv = { strength: 869,defense: 602,speed: 263,dexterity: 881,total: 2615,weapon: 77,wacc: 26,armor: 11,stealth: 3,health: 250,level: 7,name: 'xfftqhv',weaponName: 'assaultRifle'}
+var btjcuec = { strength: 1168,defense: 1466,speed: 566,dexterity: 413,total: 3613,weapon: 67,wacc: 43,armor: 22,stealth: 9,health: 200,level: 3,name: 'btjcuec',weaponName: 'bow'}
+var ixluurc = { strength: 486,defense: 1250,speed: 495,dexterity: 781,total: 3012,weapon: 70,wacc: 56,armor: 44,stealth: 9,health: 130,level: 1,name: 'ixluurc',weaponName: 'shotgun'}
+var ctxlerz = { strength: 616,defense: 230,speed: 27,dexterity: 248,total: 1121,weapon: 85,wacc: 48,armor: 31,stealth: 5,health: 180,level: 7,name: 'ctxlerz',weaponName: 'flamethrower'}
+var xdzavnq = { strength: 889,defense: 753,speed: 1310,dexterity: 1486,total: 4438,weapon: 16,wacc: 51,armor: 40,stealth: 6,health: 140,level: 4,name: 'xdzavnq',weaponName: 'assaultRifle'}
+var mqphuur = { strength: 903,defense: 18,speed: 712,dexterity: 43,total: 1676,weapon: 74,wacc: 24,armor: 29,stealth: 6,health: 270,level: 2,name: 'mqphuur',weaponName: 'bow'}
+var ojctzdv = { strength: 977,defense: 370,speed: 670,dexterity: 1353,total: 3370,weapon: 67,wacc: 23,armor: 23,stealth: 7,health: 230,level: 5,name: 'ojctzdv',weaponName: 'shotgun'}
+var svjlfqq = { strength: 757,defense: 1155,speed: 310,dexterity: 1055,total: 3277,weapon: 77,wacc: 38,armor: 24,stealth: 10,health: 150,level: 2,name: 'svjlfqq',weaponName: 'flamethrower'}
+var evuwufa = { strength: 111,defense: 1096,speed: 791,dexterity: 1366,total: 3364,weapon: 76,wacc: 43,armor: 34,stealth: 2,health: 240,level: 4,name: 'evuwufa',weaponName: 'assaultRifle'}
+var kdqthxf = { strength: 1299,defense: 532,speed: 244,dexterity: 1328,total: 3403,weapon: 23,wacc: 4,armor: 36,stealth: 6,health: 150,level: 6,name: 'kdqthxf',weaponName: 'bow'}
+var flfkfmc = { strength: 535,defense: 999,speed: 589,dexterity: 211,total: 2334,weapon: 9,wacc: 42,armor: 10,stealth: 3,health: 180,level: 7,name: 'flfkfmc',weaponName: 'shotgun'}
+var jtmxrqp = { strength: 69,defense: 504,speed: 1483,dexterity: 274,total: 2330,weapon: 14,wacc: 4,armor: 10,stealth: 1,health: 160,level: 5,name: 'jtmxrqp',weaponName: 'flamethrower'}
+var higgbha = { strength: 1478,defense: 863,speed: 1125,dexterity: 677,total: 4143,weapon: 49,wacc: 1,armor: 41,stealth: 6,health: 180,level: 4,name: 'higgbha',weaponName: 'assaultRifle'}
+var flphkfg = { strength: 1472,defense: 1476,speed: 480,dexterity: 861,total: 4289,weapon: 11,wacc: 1,armor: 4,stealth: 6,health: 250,level: 3,name: 'flphkfg',weaponName: 'bow'}
+var fyuvajl = { strength: 1219,defense: 1187,speed: 261,dexterity: 1286,total: 3953,weapon: 76,wacc: 44,armor: 36,stealth: 5,health: 280,level: 5,name: 'fyuvajl',weaponName: 'shotgun'}
+var iwlvxet = { strength: 559,defense: 369,speed: 304,dexterity: 580,total: 1812,weapon: 81,wacc: 39,armor: 39,stealth: 4,health: 110,level: 1,name: 'iwlvxet',weaponName: 'flamethrower'}
+var zyghqid = { strength: 836,defense: 400,speed: 952,dexterity: 1155,total: 3343,weapon: 80,wacc: 16,armor: 16,stealth: 1,health: 250,level: 5,name: 'zyghqid',weaponName: 'assaultRifle'}
+var bltxfzo = { strength: 1048,defense: 1484,speed: 811,dexterity: 459,total: 3802,weapon: 32,wacc: 52,armor: 10,stealth: 4,health: 140,level: 5,name: 'bltxfzo',weaponName: 'bow'}
+var vtdpyqx = { strength: 338,defense: 686,speed: 687,dexterity: 382,total: 2093,weapon: 71,wacc: 65,armor: 37,stealth: 5,health: 160,level: 7,name: 'vtdpyqx',weaponName: 'shotgun'}
+var tlpidwp = { strength: 624,defense: 951,speed: 901,dexterity: 114,total: 2590,weapon: 78,wacc: 34,armor: 39,stealth: 2,health: 260,level: 6,name: 'tlpidwp',weaponName: 'flamethrower'}
+var drlbudh = { strength: 1344,defense: 1088,speed: 559,dexterity: 885,total: 3876,weapon: 36,wacc: 53,armor: 33,stealth: 7,health: 130,level: 5,name: 'drlbudh',weaponName: 'assaultRifle'}
+var cgwpqxl = { strength: 359,defense: 282,speed: 276,dexterity: 1103,total: 2020,weapon: 50,wacc: 32,armor: 7,stealth: 6,health: 160,level: 2,name: 'cgwpqxl',weaponName: 'bow'}
+var opacxme = { strength: 268,defense: 707,speed: 707,dexterity: 1437,total: 3119,weapon: 65,wacc: 41,armor: 24,stealth: 10,health: 210,level: 5,name: 'opacxme',weaponName: 'shotgun'}
+var bgrgkhl = { strength: 522,defense: 164,speed: 991,dexterity: 1051,total: 2728,weapon: 80,wacc: 22,armor: 49,stealth: 3,health: 140,level: 1,name: 'bgrgkhl',weaponName: 'flamethrower'}
+var aqwmcuu = { strength: 405,defense: 716,speed: 1141,dexterity: 676,total: 2938,weapon: 3,wacc: 31,armor: 28,stealth: 1,health: 250,level: 7,name: 'aqwmcuu',weaponName: 'assaultRifle'}
+var wehbslo = { strength: 576,defense: 785,speed: 1152,dexterity: 320,total: 2833,weapon: 40,wacc: 40,armor: 19,stealth: 6,health: 140,level: 5,name: 'wehbslo',weaponName: 'bow'}
+var amezaso = { strength: 662,defense: 172,speed: 839,dexterity: 984,total: 2657,weapon: 36,wacc: 44,armor: 49,stealth: 6,health: 200,level: 2,name: 'amezaso',weaponName: 'shotgun'}
+var lfhpxgn = { strength: 161,defense: 1243,speed: 753,dexterity: 985,total: 3142,weapon: 29,wacc: 34,armor: 28,stealth: 9,health: 170,level: 3,name: 'lfhpxgn',weaponName: 'flamethrower'}
+var xkwxdoy = { strength: 1358,defense: 1464,speed: 257,dexterity: 18,total: 3097,weapon: 47,wacc: 2,armor: 48,stealth: 5,health: 150,level: 4,name: 'xkwxdoy',weaponName: 'assaultRifle'}
+var wtivamw = { strength: 1187,defense: 880,speed: 1093,dexterity: 506,total: 3666,weapon: 15,wacc: 7,armor: 18,stealth: 1,health: 240,level: 3,name: 'wtivamw',weaponName: 'bow'}
+var hewfdtl = { strength: 1260,defense: 978,speed: 174,dexterity: 642,total: 3054,weapon: 79,wacc: 29,armor: 21,stealth: 7,health: 230,level: 6,name: 'hewfdtl',weaponName: 'shotgun'}
+var dsrsmjc = { strength: 1016,defense: 409,speed: 1249,dexterity: 681,total: 3355,weapon: 48,wacc: 21,armor: 30,stealth: 6,health: 190,level: 4,name: 'dsrsmjc',weaponName: 'flamethrower'}
+var uqzhozl = { strength: 1312,defense: 886,speed: 1455,dexterity: 959,total: 4612,weapon: 58,wacc: 16,armor: 31,stealth: 3,health: 280,level: 7,name: 'uqzhozl',weaponName: 'assaultRifle'}
+var pnvfpbv = { strength: 1288,defense: 140,speed: 394,dexterity: 1190,total: 3012,weapon: 71,wacc: 29,armor: 10,stealth: 9,health: 100,level: 4,name: 'pnvfpbv',weaponName: 'bow'}
+var ahwcolv = { strength: 1063,defense: 570,speed: 306,dexterity: 1205,total: 3144,weapon: 56,wacc: 19,armor: 21,stealth: 7,health: 270,level: 7,name: 'ahwcolv',weaponName: 'shotgun'}
+var xwxphqv = { strength: 404,defense: 82,speed: 826,dexterity: 1212,total: 2524,weapon: 67,wacc: 29,armor: 8,stealth: 4,health: 200,level: 2,name: 'xwxphqv',weaponName: 'flamethrower'}
+var utficxy = { strength: 612,defense: 808,speed: 1100,dexterity: 1298,total: 3818,weapon: 6,wacc: 34,armor: 20,stealth: 9,health: 110,level: 1,name: 'utficxy',weaponName: 'assaultRifle'}
+var nokiroh = { strength: 98,defense: 326,speed: 806,dexterity: 1277,total: 2507,weapon: 48,wacc: 58,armor: 29,stealth: 4,health: 190,level: 6,name: 'nokiroh',weaponName: 'bow'}
+var quazyuf = { strength: 431,defense: 1243,speed: 996,dexterity: 938,total: 3608,weapon: 52,wacc: 41,armor: 22,stealth: 6,health: 190,level: 1,name: 'quazyuf',weaponName: 'shotgun'}
+var zuijjrq = { strength: 489,defense: 636,speed: 730,dexterity: 1150,total: 3005,weapon: 64,wacc: 16,armor: 35,stealth: 2,health: 120,level: 5,name: 'zuijjrq',weaponName: 'flamethrower'}
+var vgyhiem = { strength: 518,defense: 1313,speed: 913,dexterity: 1157,total: 3901,weapon: 82,wacc: 43,armor: 50,stealth: 8,health: 250,level: 1,name: 'vgyhiem',weaponName: 'assaultRifle'}
+var qjhtcqf = { strength: 477,defense: 849,speed: 1059,dexterity: 922,total: 3307,weapon: 56,wacc: 24,armor: 6,stealth: 2,health: 130,level: 4,name: 'qjhtcqf',weaponName: 'bow'}
+var wknoxxd = { strength: 29,defense: 1009,speed: 1327,dexterity: 1206,total: 3571,weapon: 31,wacc: 26,armor: 42,stealth: 10,health: 130,level: 7,name: 'wknoxxd',weaponName: 'shotgun'}
+var irnujbv = { strength: 412,defense: 885,speed: 1333,dexterity: 1453,total: 4083,weapon: 48,wacc: 35,armor: 4,stealth: 5,health: 230,level: 1,name: 'irnujbv',weaponName: 'flamethrower'}
+var flzrrbh = { strength: 1054,defense: 933,speed: 446,dexterity: 1258,total: 3691,weapon: 6,wacc: 50,armor: 40,stealth: 10,health: 130,level: 7,name: 'flzrrbh',weaponName: 'assaultRifle'}
+var odnlfch = { strength: 501,defense: 1466,speed: 908,dexterity: 896,total: 3771,weapon: 32,wacc: 39,armor: 29,stealth: 5,health: 260,level: 6,name: 'odnlfch',weaponName: 'bow'}
+var mozqlmv = { strength: 1350,defense: 132,speed: 1377,dexterity: 1389,total: 4248,weapon: 44,wacc: 9,armor: 22,stealth: 10,health: 220,level: 3,name: 'mozqlmv',weaponName: 'shotgun'}
+var nlhyknw = { strength: 660,defense: 167,speed: 906,dexterity: 418,total: 2151,weapon: 74,wacc: 9,armor: 34,stealth: 6,health: 140,level: 5,name: 'nlhyknw',weaponName: 'flamethrower'}
+var rzvcfkw = { strength: 1450,defense: 1214,speed: 448,dexterity: 1068,total: 4180,weapon: 13,wacc: 37,armor: 11,stealth: 7,health: 140,level: 2,name: 'rzvcfkw',weaponName: 'assaultRifle'}
+var itwtouy = { strength: 531,defense: 973,speed: 888,dexterity: 874,total: 3266,weapon: 31,wacc: 23,armor: 15,stealth: 1,health: 220,level: 6,name: 'itwtouy',weaponName: 'bow'}
+var gnickdx = { strength: 1145,defense: 1182,speed: 742,dexterity: 1459,total: 4528,weapon: 68,wacc: 62,armor: 22,stealth: 9,health: 120,level: 2,name: 'gnickdx',weaponName: 'shotgun'}
+var kkchqyw = { strength: 1379,defense: 1249,speed: 848,dexterity: 835,total: 4311,weapon: 82,wacc: 51,armor: 26,stealth: 10,health: 220,level: 5,name: 'kkchqyw',weaponName: 'flamethrower'}
+var xymgbso = { strength: 919,defense: 232,speed: 944,dexterity: 1055,total: 3150,weapon: 61,wacc: 6,armor: 33,stealth: 7,health: 250,level: 6,name: 'xymgbso',weaponName: 'assaultRifle'}
+var wqixzzm = { strength: 365,defense: 532,speed: 1462,dexterity: 683,total: 3042,weapon: 45,wacc: 3,armor: 19,stealth: 3,health: 270,level: 4,name: 'wqixzzm',weaponName: 'bow'}
+var lvbvjtl = { strength: 170,defense: 875,speed: 114,dexterity: 386,total: 1545,weapon: 14,wacc: 63,armor: 49,stealth: 1,health: 140,level: 3,name: 'lvbvjtl',weaponName: 'shotgun'}
+var czqjwyc = { strength: 1187,defense: 1339,speed: 1087,dexterity: 610,total: 4223,weapon: 76,wacc: 35,armor: 34,stealth: 8,health: 110,level: 2,name: 'czqjwyc',weaponName: 'flamethrower'}
+var joehjhm = { strength: 792,defense: 437,speed: 1307,dexterity: 1484,total: 4020,weapon: 37,wacc: 7,armor: 3,stealth: 10,health: 160,level: 3,name: 'joehjhm',weaponName: 'assaultRifle'}
+var vzqzphg = { strength: 1339,defense: 565,speed: 1237,dexterity: 753,total: 3894,weapon: 7,wacc: 31,armor: 28,stealth: 5,health: 130,level: 1,name: 'vzqzphg',weaponName: 'bow'}
+var kuqlqjh = { strength: 489,defense: 870,speed: 369,dexterity: 1296,total: 3024,weapon: 83,wacc: 15,armor: 28,stealth: 8,health: 110,level: 3,name: 'kuqlqjh',weaponName: 'shotgun'}
+var qpqrefy = { strength: 1168,defense: 1346,speed: 1398,dexterity: 1140,total: 5052,weapon: 46,wacc: 2,armor: 1,stealth: 2,health: 120,level: 1,name: 'qpqrefy',weaponName: 'flamethrower'}
+var evavtnj = { strength: 697,defense: 1241,speed: 161,dexterity: 1392,total: 3491,weapon: 49,wacc: 15,armor: 10,stealth: 6,health: 250,level: 4,name: 'evavtnj',weaponName: 'assaultRifle'}
+var hznqzmm = { strength: 128,defense: 227,speed: 617,dexterity: 953,total: 1925,weapon: 75,wacc: 22,armor: 48,stealth: 4,health: 110,level: 7,name: 'hznqzmm',weaponName: 'bow'}
+var dsikxsw = { strength: 157,defense: 923,speed: 781,dexterity: 1098,total: 2959,weapon: 83,wacc: 21,armor: 23,stealth: 9,health: 280,level: 1,name: 'dsikxsw',weaponName: 'shotgun'}
+var rvrdilg = { strength: 1228,defense: 262,speed: 863,dexterity: 1135,total: 3488,weapon: 26,wacc: 26,armor: 9,stealth: 4,health: 280,level: 1,name: 'rvrdilg',weaponName: 'flamethrower'}
+var uszzaid = { strength: 976,defense: 288,speed: 1346,dexterity: 248,total: 2858,weapon: 46,wacc: 20,armor: 44,stealth: 10,health: 250,level: 3,name: 'uszzaid',weaponName: 'assaultRifle'}
+var gntqjuz = { strength: 1177,defense: 540,speed: 519,dexterity: 397,total: 2633,weapon: 51,wacc: 9,armor: 20,stealth: 9,health: 260,level: 2,name: 'gntqjuz',weaponName: 'bow'}
+var wxbsuam = { strength: 307,defense: 1268,speed: 879,dexterity: 950,total: 3404,weapon: 6,wacc: 5,armor: 27,stealth: 2,health: 270,level: 7,name: 'wxbsuam',weaponName: 'shotgun'}
+var mlccqca = { strength: 642,defense: 1311,speed: 129,dexterity: 818,total: 2900,weapon: 48,wacc: 64,armor: 22,stealth: 6,health: 230,level: 1,name: 'mlccqca',weaponName: 'flamethrower'}
+var bfwoqoi = { strength: 198,defense: 110,speed: 973,dexterity: 1417,total: 2698,weapon: 37,wacc: 2,armor: 49,stealth: 1,health: 240,level: 5,name: 'bfwoqoi',weaponName: 'assaultRifle'}
+var aruquul = { strength: 1000,defense: 622,speed: 1471,dexterity: 1268,total: 4361,weapon: 85,wacc: 32,armor: 5,stealth: 3,health: 190,level: 5,name: 'aruquul',weaponName: 'bow'}
+var hxkfnwq = { strength: 1013,defense: 1471,speed: 1284,dexterity: 1157,total: 4925,weapon: 25,wacc: 12,armor: 17,stealth: 6,health: 170,level: 3,name: 'hxkfnwq',weaponName: 'shotgun'}
+var ptpjsaf = { strength: 489,defense: 765,speed: 97,dexterity: 895,total: 2246,weapon: 46,wacc: 14,armor: 49,stealth: 1,health: 120,level: 2,name: 'ptpjsaf',weaponName: 'flamethrower'}
+var qcpvepv = { strength: 1452,defense: 1458,speed: 110,dexterity: 92,total: 3112,weapon: 35,wacc: 47,armor: 2,stealth: 9,health: 230,level: 3,name: 'qcpvepv',weaponName: 'assaultRifle'}
+var ahkxksq = { strength: 1041,defense: 353,speed: 1469,dexterity: 593,total: 3456,weapon: 58,wacc: 63,armor: 17,stealth: 9,health: 280,level: 7,name: 'ahkxksq',weaponName: 'bow'}
+var oyrryda = { strength: 381,defense: 129,speed: 1291,dexterity: 847,total: 2648,weapon: 48,wacc: 16,armor: 7,stealth: 5,health: 220,level: 1,name: 'oyrryda',weaponName: 'shotgun'}
+var dwgpwfy = { strength: 1438,defense: 281,speed: 1135,dexterity: 1203,total: 4057,weapon: 37,wacc: 44,armor: 37,stealth: 9,health: 190,level: 1,name: 'dwgpwfy',weaponName: 'flamethrower'}
+var lnrqcca = { strength: 489,defense: 750,speed: 675,dexterity: 273,total: 2187,weapon: 77,wacc: 16,armor: 45,stealth: 3,health: 190,level: 1,name: 'lnrqcca',weaponName: 'assaultRifle'}
+var lkeqsmf = { strength: 911,defense: 1108,speed: 1491,dexterity: 313,total: 3823,weapon: 22,wacc: 41,armor: 32,stealth: 8,health: 180,level: 5,name: 'lkeqsmf',weaponName: 'bow'}
+var kwtgvhe = { strength: 730,defense: 970,speed: 226,dexterity: 1212,total: 3138,weapon: 37,wacc: 2,armor: 16,stealth: 6,health: 200,level: 1,name: 'kwtgvhe',weaponName: 'shotgun'}
+var vsqfgjw = { strength: 330,defense: 1088,speed: 172,dexterity: 1233,total: 2823,weapon: 19,wacc: 14,armor: 36,stealth: 10,health: 270,level: 7,name: 'vsqfgjw',weaponName: 'flamethrower'}
+var lzaxogk = { strength: 1291,defense: 139,speed: 221,dexterity: 309,total: 1960,weapon: 82,wacc: 56,armor: 20,stealth: 6,health: 230,level: 5,name: 'lzaxogk',weaponName: 'assaultRifle'}
+var ajqvffu = { strength: 1238,defense: 139,speed: 608,dexterity: 825,total: 2810,weapon: 80,wacc: 34,armor: 24,stealth: 10,health: 220,level: 7,name: 'ajqvffu',weaponName: 'bow'}
+var yhumyls = { strength: 103,defense: 1147,speed: 1220,dexterity: 228,total: 2698,weapon: 62,wacc: 54,armor: 39,stealth: 5,health: 280,level: 4,name: 'yhumyls',weaponName: 'shotgun'}
+var woqdbqk = { strength: 123,defense: 553,speed: 906,dexterity: 530,total: 2112,weapon: 12,wacc: 54,armor: 29,stealth: 1,health: 130,level: 5,name: 'woqdbqk',weaponName: 'flamethrower'}
+var zapidoy = { strength: 424,defense: 893,speed: 146,dexterity: 1203,total: 2666,weapon: 30,wacc: 56,armor: 26,stealth: 9,health: 220,level: 7,name: 'zapidoy',weaponName: 'assaultRifle'}
+var spujfdo = { strength: 704,defense: 680,speed: 608,dexterity: 347,total: 2339,weapon: 22,wacc: 17,armor: 11,stealth: 10,health: 120,level: 7,name: 'spujfdo',weaponName: 'bow'}
+var nivkuvc = { strength: 505,defense: 37,speed: 554,dexterity: 396,total: 1492,weapon: 72,wacc: 65,armor: 47,stealth: 10,health: 210,level: 2,name: 'nivkuvc',weaponName: 'shotgun'}
+var fbyvcfl = { strength: 50,defense: 734,speed: 330,dexterity: 1081,total: 2195,weapon: 70,wacc: 44,armor: 35,stealth: 10,health: 280,level: 2,name: 'fbyvcfl',weaponName: 'flamethrower'}
+var iwpndbg = { strength: 608,defense: 898,speed: 1086,dexterity: 225,total: 2817,weapon: 52,wacc: 43,armor: 26,stealth: 7,health: 240,level: 1,name: 'iwpndbg',weaponName: 'assaultRifle'}
+var pvspubg = { strength: 1098,defense: 245,speed: 448,dexterity: 1381,total: 3172,weapon: 9,wacc: 21,armor: 14,stealth: 8,health: 200,level: 2,name: 'pvspubg',weaponName: 'bow'}
+var bxyvfvj = { strength: 389,defense: 1481,speed: 1098,dexterity: 487,total: 3455,weapon: 16,wacc: 32,armor: 29,stealth: 4,health: 170,level: 7,name: 'bxyvfvj',weaponName: 'shotgun'}
+var xsqelfd = { strength: 348,defense: 944,speed: 1433,dexterity: 703,total: 3428,weapon: 72,wacc: 62,armor: 5,stealth: 2,health: 200,level: 7,name: 'xsqelfd',weaponName: 'flamethrower'}
+var wuqodne = { strength: 1016,defense: 1181,speed: 843,dexterity: 1472,total: 4512,weapon: 28,wacc: 32,armor: 45,stealth: 7,health: 220,level: 4,name: 'wuqodne',weaponName: 'assaultRifle'}
+var emqftal = { strength: 282,defense: 181,speed: 722,dexterity: 588,total: 1773,weapon: 24,wacc: 58,armor: 36,stealth: 10,health: 190,level: 4,name: 'emqftal',weaponName: 'bow'}
+var nhsnxiw = { strength: 1034,defense: 812,speed: 979,dexterity: 482,total: 3307,weapon: 57,wacc: 3,armor: 13,stealth: 5,health: 140,level: 2,name: 'nhsnxiw',weaponName: 'shotgun'}
+var vftebeo = { strength: 333,defense: 60,speed: 1290,dexterity: 265,total: 1948,weapon: 55,wacc: 52,armor: 42,stealth: 3,health: 140,level: 6,name: 'vftebeo',weaponName: 'flamethrower'}
+var uxelhak = { strength: 381,defense: 1147,speed: 1260,dexterity: 231,total: 3019,weapon: 51,wacc: 42,armor: 23,stealth: 10,health: 130,level: 7,name: 'uxelhak',weaponName: 'assaultRifle'}
+var bppmuso = { strength: 1000,defense: 588,speed: 1465,dexterity: 1448,total: 4501,weapon: 32,wacc: 16,armor: 50,stealth: 5,health: 250,level: 4,name: 'bppmuso',weaponName: 'bow'}
+var uiumife = { strength: 1481,defense: 558,speed: 71,dexterity: 1088,total: 3198,weapon: 73,wacc: 40,armor: 17,stealth: 7,health: 230,level: 3,name: 'uiumife',weaponName: 'shotgun'}
+var cfnvxbo = { strength: 198,defense: 868,speed: 1217,dexterity: 511,total: 2794,weapon: 33,wacc: 47,armor: 38,stealth: 1,health: 100,level: 6,name: 'cfnvxbo',weaponName: 'flamethrower'}
+var kpkyubn = { strength: 1141,defense: 105,speed: 1471,dexterity: 1148,total: 3865,weapon: 65,wacc: 22,armor: 20,stealth: 9,health: 110,level: 5,name: 'kpkyubn',weaponName: 'assaultRifle'}
+var duwjkhh = { strength: 1482,defense: 921,speed: 431,dexterity: 1072,total: 3906,weapon: 59,wacc: 30,armor: 25,stealth: 1,health: 230,level: 2,name: 'duwjkhh',weaponName: 'bow'}
+var sfmumno = { strength: 1031,defense: 385,speed: 470,dexterity: 1125,total: 3011,weapon: 46,wacc: 38,armor: 35,stealth: 5,health: 100,level: 3,name: 'sfmumno',weaponName: 'shotgun'}
+var wqbisvp = { strength: 803,defense: 288,speed: 711,dexterity: 1402,total: 3204,weapon: 66,wacc: 48,armor: 26,stealth: 5,health: 140,level: 2,name: 'wqbisvp',weaponName: 'flamethrower'}
+var njfclzn = { strength: 222,defense: 136,speed: 566,dexterity: 608,total: 1532,weapon: 4,wacc: 51,armor: 27,stealth: 1,health: 210,level: 7,name: 'njfclzn',weaponName: 'assaultRifle'}
+var wuaoqzl = { strength: 1140,defense: 552,speed: 538,dexterity: 255,total: 2485,weapon: 84,wacc: 56,armor: 4,stealth: 9,health: 250,level: 4,name: 'wuaoqzl',weaponName: 'bow'}
+var bfmaxbj = { strength: 224,defense: 462,speed: 339,dexterity: 1012,total: 2037,weapon: 4,wacc: 26,armor: 38,stealth: 8,health: 170,level: 4,name: 'bfmaxbj',weaponName: 'shotgun'}
+var pqijnvq = { strength: 947,defense: 676,speed: 325,dexterity: 198,total: 2146,weapon: 57,wacc: 42,armor: 24,stealth: 3,health: 260,level: 2,name: 'pqijnvq',weaponName: 'flamethrower'}
+var wcngjrk = { strength: 1091,defense: 562,speed: 927,dexterity: 1070,total: 3650,weapon: 19,wacc: 49,armor: 24,stealth: 5,health: 130,level: 7,name: 'wcngjrk',weaponName: 'assaultRifle'}
+var hvqbjlx = { strength: 1311,defense: 1399,speed: 308,dexterity: 1465,total: 4483,weapon: 39,wacc: 29,armor: 34,stealth: 6,health: 140,level: 6,name: 'hvqbjlx',weaponName: 'bow'}
+var qbcmbeu = { strength: 1272,defense: 1489,speed: 918,dexterity: 200,total: 3879,weapon: 68,wacc: 65,armor: 49,stealth: 5,health: 150,level: 7,name: 'qbcmbeu',weaponName: 'shotgun'}
+var pmogcze = { strength: 990,defense: 438,speed: 141,dexterity: 847,total: 2416,weapon: 6,wacc: 36,armor: 33,stealth: 1,health: 280,level: 1,name: 'pmogcze',weaponName: 'flamethrower'}
+var wqzasxh = { strength: 124,defense: 1164,speed: 245,dexterity: 1088,total: 2621,weapon: 6,wacc: 20,armor: 48,stealth: 10,health: 250,level: 3,name: 'wqzasxh',weaponName: 'assaultRifle'}
+var lexhnio = { strength: 1116,defense: 1413,speed: 855,dexterity: 734,total: 4118,weapon: 75,wacc: 23,armor: 9,stealth: 1,health: 170,level: 5,name: 'lexhnio',weaponName: 'bow'}
+var kboajhd = { strength: 88,defense: 1378,speed: 1120,dexterity: 288,total: 2874,weapon: 28,wacc: 9,armor: 34,stealth: 5,health: 250,level: 6,name: 'kboajhd',weaponName: 'shotgun'}
+
+
+var playerArray = [
+		thunder,
+		maser,
+		tman23,
+	lirznbc,
+yvxsuya,
+lpfqqgo,
+trlknbt,
+joolshk,
+qfivkvf,
+rkxwogh,
+bgcaoqk,
+jldebch,
+zwsgymb,
+ufrvzgo,
+goaryfw,
+rgnbtuz,
+xpvjlan,
+zclsgyd,
+pibwstm,
+mlqkuwk,
+yrfsyte,
+lkkjkmg,
+qpolkec,
+qntvjmt,
+nwscyll,
+odajnyl,
+wbucpaz,
+apthnzc,
+nnqcvjx,
+hglbhoz,
+mfnstxu,
+zyeoffo,
+bqovoel,
+mqvxmnn,
+bmwmkjo,
+sdzzcfz,
+iniwtyu,
+acmpttm,
+ahodlsf,
+kllljnb,
+frcpjvb,
+zfevyrr,
+vzppxos,
+fcqzwhu,
+vjodqhr,
+revggdq,
+vvluiln,
+kgvaabh,
+uxqdjfx,
+svcqyff,
+rejrsvt,
+cebrmwe,
+tohtdfq,
+schbgxy,
+ikzbkwx,
+ywdyvph,
+cdxnibf,
+xxtxvaz,
+uofivpy,
+gbcirym,
+apxqqmo,
+aczhqax,
+pkstjzq,
+vaqurxh,
+pqtawso,
+hrrvqtx,
+hywebrb,
+ixapbzg,
+xvmyqdr,
+bcptksp,
+wuabktq,
+xdpizji,
+jhzlsnx,
+qxvovke,
+tfndtgj,
+fgubpuw,
+ucvxttw,
+jokjfdf,
+ekpsbwv,
+xtjmnic,
+bjfuqzs,
+dxyxtvx,
+hseytep,
+fyipend,
+pmtqyqx,
+zimxatj,
+avwguqv,
+uvetblw,
+idysyvy,
+phkyian,
+rgauqir,
+whedlrl,
+bdluffr,
+houxdyf,
+zoybtkc,
+pzquwsw,
+zackpbt,
+bxdayno,
+rdefncw,
+jofkhew,
+gtepglv,
+sjmoegl,
+zagplkz,
+bamlffd,
+ffmlbfi,
+ftqezyx,
+mkwkpcw,
+tbvphvr,
+pfkmcms,
+tzlmket,
+amxaohe,
+vqekbjv,
+upfhyub,
+axdohpk,
+kvlnibb,
+zpwrwlp,
+hmaxvgo,
+ekxwpwc,
+deqirsu,
+mfmgrdo,
+vjeplnx,
+jndozqo,
+xpszmqw,
+paqigph,
+vvbxjzv,
+jirswty,
+txsqdtw,
+ygjxdhl,
+sfyqaam,
+ypcjgsi,
+katmtbo,
+eahsyen,
+fyjntwi,
+ovlbtww,
+qstgtby,
+flmtczh,
+enxbydy,
+iojfsyb,
+rzuypwv,
+xrnwxck,
+hqvbzyj,
+vordmkj,
+cippbmw,
+oymlvpn,
+pockjat,
+tbrmuvj,
+gqlbvho,
+olshbkh,
+pcmbjjb,
+qbiblzk,
+ttlivla,
+nqxlldk,
+pqwazxn,
+lmymcan,
+qzjskuv,
+sbldzsh,
+zcwxxou,
+zqgygmn,
+ndrqrbf,
+pfhdoke,
+myqnfqe,
+hquppea,
+dyduizg,
+yambtdz,
+tcehxyn,
+wnfvjwx,
+qafvtkz,
+cipccce,
+watvkvt,
+amsazvc,
+zaaysfu,
+puadbzi,
+afaxjel,
+fhyzwyb,
+xbjjvji,
+fcwttln,
+bgzwqfl,
+icwkztk,
+gmlhwpo,
+hltxctg,
+pdqdqjw,
+xxmdxds,
+pvfhdyk,
+cvtteqs,
+zihorax,
+kicqtyr,
+apcwovo,
+uhofwsd,
+xfftqhv,
+btjcuec,
+ixluurc,
+ctxlerz,
+xdzavnq,
+mqphuur,
+ojctzdv,
+svjlfqq,
+evuwufa,
+kdqthxf,
+flfkfmc,
+jtmxrqp,
+higgbha,
+flphkfg,
+fyuvajl,
+iwlvxet,
+zyghqid,
+bltxfzo,
+vtdpyqx,
+tlpidwp,
+drlbudh,
+cgwpqxl,
+opacxme,
+bgrgkhl,
+aqwmcuu,
+wehbslo,
+amezaso,
+lfhpxgn,
+xkwxdoy,
+wtivamw,
+hewfdtl,
+dsrsmjc,
+uqzhozl,
+pnvfpbv,
+ahwcolv,
+xwxphqv,
+utficxy,
+nokiroh,
+quazyuf,
+zuijjrq,
+vgyhiem,
+qjhtcqf,
+wknoxxd,
+irnujbv,
+flzrrbh,
+odnlfch,
+mozqlmv,
+nlhyknw,
+rzvcfkw,
+itwtouy,
+gnickdx,
+kkchqyw,
+xymgbso,
+wqixzzm,
+lvbvjtl,
+czqjwyc,
+joehjhm,
+vzqzphg,
+kuqlqjh,
+qpqrefy,
+evavtnj,
+hznqzmm,
+dsikxsw,
+rvrdilg,
+uszzaid,
+gntqjuz,
+wxbsuam,
+mlccqca,
+bfwoqoi,
+aruquul,
+hxkfnwq,
+ptpjsaf,
+qcpvepv,
+ahkxksq,
+oyrryda,
+dwgpwfy,
+lnrqcca,
+lkeqsmf,
+kwtgvhe,
+vsqfgjw,
+lzaxogk,
+ajqvffu,
+yhumyls,
+woqdbqk,
+zapidoy,
+spujfdo,
+nivkuvc,
+fbyvcfl,
+iwpndbg,
+pvspubg,
+bxyvfvj,
+xsqelfd,
+wuqodne,
+emqftal,
+nhsnxiw,
+vftebeo,
+uxelhak,
+bppmuso,
+uiumife,
+cfnvxbo,
+kpkyubn,
+duwjkhh,
+sfmumno,
+wqbisvp,
+njfclzn,
+wuaoqzl,
+bfmaxbj,
+pqijnvq,
+wcngjrk,
+hvqbjlx,
+qbcmbeu,
+pmogcze,
+wqzasxh,
+lexhnio,
+kboajhd,
+
+	];
+	var weaponArray = [
+		flameThrower,
+		assaultRifle,
+		bow,
+		shotgun
+	];
+var npcArray =  [];
+$('#generate').on('click', function () {
+	//Change this to make the locations harder
+	var statMultiplier = 1.2;
+	//This is where the magic happens
+	npcArray = getNpcArray(playerArray, weaponArray, baseStatMultiplier)
+	console.log(npcArray);
+	//Just to put the data on screen to see and be tested
+	copyToScreen(npcArray, playerArray);
+});
+
+
+$('#WriteToFile').on('click', function () {
+	
+	if (confirm('This will run the simulator for 300 randomized users and download a safe .csv file, continue?')) {
+    // Save it!
+
+	npcArray = getNpcArray(playerArray, weaponArray)
+	copyToScreen(npcArray, playerArray);
+	
+	for (z = 0; z < playerArray.length; z++) {
+		missCount = 0;
+		hitCount = 0;
+		var npcWin = 0;
+		var playerWin = 0;
+		var remainingHP = 0;
+		var npcHealth = npcArray[z].health;
+		var pHealth =  playerArray[z].health;
+
+		
+		
+				while (pHealth > 0  && npcHealth > 0) {
+   
+									
+
+						p1Hit = damage(playerArray[z].strength,npcArray[z].defense,playerArray[z].speed,
+									 npcArray[z].dexterity,playerArray[z].weapon,playerArray[z].wacc, 
+									 playerArray[z].armor,playerArray[z].stealth,playerArray[z].health,5850,5850);
+
+						npc1Hit = damage(npcArray[z].strength,playerArray[z].defense,npcArray[z].speed,
+									 playerArray[z].dexterity,npcArray[z].weapon,npcArray[z].wacc, 
+									 npcArray[z].armor,npcArray[z].stealth,npcArray[z].health,5850,5850);
+
+						if(p1Hit != "MISS"){
+							
+							npcHealth -= p1Hit;
+						
+						}
+						$('#p1 > .dmg').text("You hit for " + p1Hit);
+
+						if(npc1Hit != "MISS"){
+							
+							pHealth -= npc1Hit;
+							
+						}
+						$('#npc1 > .dmg').text("NPC hit for " + npc1Hit);
+
+					
+					
+		
+					
+			} //end of while
+					if(pHealth > npcHealth){
+						playerWin = 1;
+						remainingHP = pHealth;
+					}else if(npcHealth >= pHealth){
+						npcWin = 1;
+						remainingHP = npcHealth;
+					}
+					
+					var loopData = [
+							z,
+						playerWin,
+						npcWin,
+						playerArray[z].strength,
+						playerArray[z].defense,
+						playerArray[z].speed,
+						playerArray[z].dexterity,
+						playerArray[z].weapon,
+						playerArray[z].wacc, 
+						playerArray[z].armor,
+						playerArray[z].stealth,
+						npcArray[z].strength,
+						npcArray[z].defense,
+						npcArray[z].speed,
+						npcArray[z].dexterity,
+						npcArray[z].weapon,
+						npcArray[z].wacc, 
+						npcArray[z].armor,
+						npcArray[z].stealth,
+						missCount,
+						hitCount,
+						npcHealth,
+						pHealth,
+						];	
+			
+		outputData.push(loopData);
+			loopData = [];
+
+		
+		
+		
+	};
+	console.table(outputData);
+	exportToCsv();
+	
+	} else {
+    // Do nothing!
+}
+	});
+
+function exportToCsv() {
+  var CsvString = "";
+  outputData.forEach(function(RowItem, RowIndex) {
+    RowItem.forEach(function(ColItem, ColIndex) {
+      CsvString += ColItem + ',';
+    });
+    CsvString += "\r\n";
+  });
+  CsvString = "data:application/csv," + encodeURIComponent(CsvString);
+ var x = document.createElement("A");
+ x.setAttribute("href", CsvString );
+ x.setAttribute("download","somedata.csv");
+ document.body.appendChild(x);
+ x.click();
+}
+
+//This is the meat of the new code the rest is just to function in this sandbox. 
+function getNpcArray(players, weapons, difficultyMultiplier){
+	
+	var generatedNpcs = [];
+	
+	for (i = 0; i < players.length; i++) {
+			var npc = {
+				strength: 0,
+				defense: 0,
+				speed: 0,
+				dexterity: 0,
+				weapon: 0,
+				wacc: 0,
+				wname: '',
+				armor: 30,
+				stealth: 0,
+				health: 0,
+				name: 'NPC '
+			};
+		
+			//Array of rand 1-0 sorted
+			var d = [Math.random(),Math.random(), Math.random()];
+			d = sortingFunction(d[0],d[1],d[2]);
+			var monster_total_stats = players[i].total * (Math.random() * (difficultyMultiplier - 0.45) +  0.45); // total stats; random from 0.8 to 1.3 times your total stats
+			var base_stat = 0.1;
+			var s = monster_total_stats / (1+4*base_stat); // stat coefficient; scaled so that total stat calcs works out with base_stat
+			npc.strength  = (((base_stat + d[0]) * s) *0.85).toFixed(2);
+			npc.defense   = (((base_stat + d[1]-d[0]) * s) *0.77).toFixed(2);
+			npc.speed     = ((base_stat + d[2]-d[1]) * s).toFixed(2);
+			npc.dexterity = ((base_stat + 1-d[2]) * s).toFixed(2);
+			npc.weapon    = weapons[i%4].damage;
+			npc.wacc      = weapons[i%4].accuracy;
+			npc.stealth   = weapons[i%4].stealth;
+			npc.wname     = weapons[i%4].name;
+			npc.health    = getHealth(players);
+			npc.name     += i;
+
+			generatedNpcs.push(npc);
+		}
+	
+	
+ 		var highestPlayer =	getStrongestPlayer(players);
+		var boss = {
+				strength: 0,
+				defense: 0,
+				speed: 0,
+				dexterity: 0,
+				weapon: 0,
+				wacc: 0,
+				wname: '',
+				armor: 50,
+				stealth: 0,
+				health: 0,
+				name: 'THE BOSS'
+			};
+	
+		boss.strength  = ((base_stat + d[0]) * s).toFixed(2);
+		boss.defense   = ((((base_stat + d[1]-d[0]) * s) * 1.2)  / 2).toFixed(2);
+		boss.speed     = (((base_stat + d[2]-d[1]) * s)* 1.2).toFixed(2);
+		boss.dexterity = (((base_stat + 1-d[2]) * s)* 1.2).toFixed(2);
+    boss.weapon    = highestPlayer.weapon;
+    boss.wacc      = highestPlayer.wacc;
+    boss.stealth   = highestPlayer.stealth;
+    boss.wname     = highestPlayer.weaponName;
+    boss.health    = getHealth(players) * 2;
+		generatedNpcs.push(boss);
+	
+	return generatedNpcs;
+}
+
+function getHealth(playerArray){
+	var randomMultiplier = Math.floor(Math.random()*(25-10+1)+10);
+	var randomHealth =  (Math.round( [playerArray[0].level, playerArray[1].level, playerArray[2].level].reduce((a, b) => a + b, 0) ) *  randomMultiplier );
+	return randomHealth;
+}
+var sortingFunction = function(){ 
+ return [].slice.apply(arguments).sort(function(a, b) {  return a - b; }); 
+}
+/*
+	From here on it's just functionality 
+*/
+function copyToScreen(arrayOfNpcs, arrayOfPlayers){
+	
+	$( ".npc" ).each(function( index ) {
+		
+			$('#npc' + (index+1)).empty();
+			var name = document.createElement('div');
+			name.className = "npcAttribute";
+			name.id = "name"
+			name.innerHTML = arrayOfNpcs[index].name;
+			$('#npc' + (index+1)).append(name);
+		
+			var health = document.createElement('div');
+			health.className = "npcAttribute";
+			health.id = "health"
+			health.innerHTML = arrayOfNpcs[index].health;
+			$('#npc' + (index+1)).append(health);
+		
+			var strength = document.createElement('div');
+			strength.className = "npcAttribute";
+			strength.id = "strength"
+			strength.innerHTML = arrayOfNpcs[index].strength;
+			$('#npc' + (index+1)).append(strength);
+		
+			var defense = document.createElement('div');
+			defense.className = "npcAttribute";
+			defense.id = "defense"
+			defense.innerHTML = arrayOfNpcs[index].defense;
+			$('#npc' + (index+1)).append(defense);
+		
+			var speed = document.createElement('div');
+			speed.className = "npcAttribute";
+			speed.id = "speed"
+			speed.innerHTML = arrayOfNpcs[index].speed;
+			$('#npc' + (index+1)).append(speed);
+		
+			var dexterity = document.createElement('div');
+			dexterity.className = "npcAttribute";
+			dexterity.id = "dexterity"
+			dexterity.innerHTML = arrayOfNpcs[index].dexterity;
+			$('#npc' + (index+1)).append(dexterity);
+		
+			var dmgOutput = document.createElement('div');
+			dmgOutput.className = "dmg";
+			$('#npc' + (index+1)).append(dmgOutput);
+	});
+	
+	$( ".player" ).each(function( index ) {
+		
+			$('#p' + (index+1)).empty();
+			var atk = document.createElement('button');
+			atk.className = "atk";
+			atk.id = '#p' + (index+1);
+			atk.innerHTML = 'Attack!';
+			$('#p' + (index+1)).append(atk);
+		
+			var name = document.createElement('div');
+			name.className = "playerAttribute";
+			name.id = "name"
+			name.innerHTML = arrayOfPlayers[index].name;
+			$('#p' + (index+1)).append(name);
+		
+			var health = document.createElement('div');
+			health.className = "playerAttribute";
+			health.id = "health"
+			health.innerHTML = arrayOfPlayers[index].health;
+			$('#p' + (index+1)).append(health);
+		
+			var strength = document.createElement('div');
+			strength.className = "playerAttribute";
+			strength.id = "strength"
+			strength.innerHTML = arrayOfPlayers[index].strength;
+			$('#p' + (index+1)).append(strength);
+		
+			var defense = document.createElement('div');
+			defense.className = "playerAttribute";
+			defense.id = "defense"
+			defense.innerHTML = arrayOfPlayers[index].defense;
+			$('#p' + (index+1)).append(defense);
+		
+			var speed = document.createElement('div');
+			speed.className = "playerAttribute";
+			speed.id = "speed"
+			speed.innerHTML = arrayOfPlayers[index].speed;
+			$('#p' + (index+1)).append(speed);
+		
+			var dexterity = document.createElement('div');
+			dexterity.className = "playerAttribute";
+			dexterity.id = "dexterity"
+			dexterity.innerHTML = arrayOfPlayers[index].dexterity;
+			$('#p' + (index+1)).append(dexterity);
+		
+			var dmgOutput = document.createElement('div');
+			dmgOutput.className = "dmg";
+			$('#p' + (index+1)).append(dmgOutput);
+	});
+}
+function getStrongestPlayer(arrayOfPlayers){
+	
+		var max = arrayOfPlayers[0].total;
+    var maxIndex = 0;
+		var topPlayer = {};	
+	
+		for (var i = 1; i < arrayOfPlayers.length; i++) {
+        if (arrayOfPlayers[i].total > max) {
+            maxIndex = i;
+            max = arrayOfPlayers[i].total;
+						topPlayer = arrayOfPlayers[i];
+        }
+    }
+	return topPlayer;
+}
+
+
+$('.player').on('click', function () {
+	
+	
+	if(this.id === "p1" && ($('#npc1 > #health').text() > 0) ){
+		p1Hit = damage(playerArray[0].strength,npcArray[0].defense,playerArray[0].speed,
+					 npcArray[0].dexterity,playerArray[0].weapon,playerArray[0].wacc, 
+					 playerArray[0].armor,playerArray[0].stealth,playerArray[0].health,5850,5850);
+		
+		npc1Hit = damage(npcArray[0].strength,playerArray[0].defense,npcArray[0].speed,
+					 playerArray[0].dexterity,npcArray[0].weapon,npcArray[0].wacc, 
+					 npcArray[0].armor,npcArray[0].stealth,npcArray[0].health,5850,5850);
+		
+		if(p1Hit != "MISS"){
+			var curHealth = $('#npc1 > #health').text();
+			curHealth -= p1Hit;
+			$('#npc1 > #health').text(curHealth);
+		}
+		$('#p1 > .dmg').text("You hit for " + p1Hit);
+		
+		if(npc1Hit != "MISS"){
+			var curHealth = $('#p1 > #health').text();
+			curHealth -= npc1Hit;
+			$('#p1 > #health').text(curHealth);
+		}
+		$('#npc1 > .dmg').text("NPC hit for " + npc1Hit);
+		
+	}else if(this.id === "p1"){
+		p1Hit = damage(playerArray[0].strength,npcArray[3].defense,playerArray[0].speed,
+					 npcArray[3].dexterity,playerArray[0].weapon,playerArray[0].wacc, 
+					 playerArray[0].armor,playerArray[0].stealth,playerArray[0].health,5850,5850);
+		
+		bossHit = damage(npcArray[3].strength,playerArray[0].defense,npcArray[3].speed,
+					 playerArray[0].dexterity,npcArray[3].weapon,npcArray[3].wacc, 
+					 npcArray[3].armor,npcArray[3].stealth,npcArray[3].health,5850,5850);
+		if(p1Hit != "MISS"){
+			var curHealth = $('#npc4 > #health').text();
+			curHealth -= p1Hit;
+			$('#npc4 > #health').text(curHealth);
+		}
+		$('#p1 > .dmg').text("You hit for " + p1Hit);
+		
+		if(bossHit != "MISS"){
+			var curHealth = $('#p1 > #health').text();
+			curHealth -= bossHit;
+			$('#p1 > #health').text(curHealth);
+		}
+		$('#npc4 > .dmg').text("NPC hit for " + bossHit);
+		
+	}
+	
+	if(this.id === "p2" && ($('#npc2 > #health').text() > 0) ){
+		p2Hit = damage(playerArray[1].strength,npcArray[1].defense,playerArray[1].speed,
+					 npcArray[1].dexterity,playerArray[1].weapon,playerArray[1].wacc, 
+					 playerArray[1].armor,playerArray[1].stealth,playerArray[1].health,5850,5850);
+		
+		npc2Hit = damage(npcArray[1].strength,playerArray[1].defense,npcArray[1].speed,
+					 playerArray[1].dexterity,npcArray[1].weapon,npcArray[1].wacc, 
+					 npcArray[1].armor,npcArray[1].stealth,npcArray[1].health,5850,5850);
+		
+		
+		if(p2Hit != "MISS"){
+			var curHealth = $('#npc2 > #health').text();
+			curHealth -= p2Hit;
+			$('#npc2 > #health').text(curHealth);
+		}
+		$('#p2 > .dmg').text("You hit for " + p2Hit);
+		if(npc2Hit != "MISS"){
+			var curHealth = $('#p2 > #health').text();
+			curHealth -= npc2Hit;
+			$('#p2 > #health').text(curHealth);
+		}
+		$('#npc2 > .dmg').text("NPC hit for " + npc2Hit);
+	}else if(this.id === "p2"){
+		p1Hit = damage(playerArray[1].strength,npcArray[3].defense,playerArray[1].speed,
+					 npcArray[3].dexterity,playerArray[1].weapon,playerArray[1].wacc, 
+					 playerArray[1].armor,playerArray[1].stealth,playerArray[1].health,5850,5850);
+		
+		bossHit = damage(npcArray[3].strength,playerArray[1].defense,npcArray[3].speed,
+					 playerArray[1].dexterity,npcArray[3].weapon,npcArray[3].wacc, 
+					 npcArray[3].armor,npcArray[3].stealth,npcArray[3].health,5850,5850);
+		if(p1Hit != "MISS"){
+			var curHealth = $('#npc4 > #health').text();
+			curHealth -= p1Hit;
+			$('#npc4 > #health').text(curHealth);
+		}
+		$('#p2 > .dmg').text("You hit for " + p1Hit);
+		
+		if(bossHit != "MISS"){
+			var curHealth = $('#p2 > #health').text();
+			curHealth -= bossHit;
+			$('#p2 > #health').text(curHealth);
+		}
+		$('#npc4 > .dmg').text("NPC hit for " + bossHit);
+		
+	}
+	
+	if(this.id === "p3" && ($('#npc3 > #health').text() > 0) ){
+		p3Hit = damage(playerArray[2].strength,npcArray[2].defense,playerArray[2].speed,
+					 npcArray[2].dexterity,playerArray[2].weapon,playerArray[2].wacc, 
+					 playerArray[2].armor,playerArray[2].stealth,playerArray[2].health,5850,5850);
+		
+		npc3Hit = damage(npcArray[2].strength,playerArray[2].defense,npcArray[2].speed,
+					 playerArray[2].dexterity,npcArray[2].weapon,npcArray[1].wacc, 
+					 npcArray[2].armor,npcArray[2].stealth,npcArray[2].health,5850,5850);
+		
+		
+		if(p3Hit != "MISS"){
+			var curHealth = $('#npc3 > #health').text();
+			curHealth -= p3Hit;
+			$('#npc3 > #health').text(curHealth);
+		}
+		$('#p3 > .dmg').text("You hit for " + p3Hit);
+		if(npc3Hit != "MISS"){
+			var curHealth = $('#p3 > #health').text();
+			curHealth -= npc3Hit;
+			$('#p3 > #health').text(curHealth);
+		}
+		$('#npc3 > .dmg').text("NPC hit for " + npc3Hit);
+	}else if(this.id === "p3"){
+		p1Hit = damage(playerArray[2].strength,npcArray[3].defense,playerArray[2].speed,
+					 npcArray[3].dexterity,playerArray[2].weapon,playerArray[2].wacc, 
+					 playerArray[2].armor,playerArray[2].stealth,playerArray[2].health,5850,5850);
+		
+		bossHit = damage(npcArray[3].strength,playerArray[2].defense,npcArray[3].speed,
+					 playerArray[2].dexterity,npcArray[3].weapon,npcArray[3].wacc, 
+					 npcArray[3].armor,npcArray[3].stealth,npcArray[3].health,5850,5850);
+		if(p1Hit != "MISS"){
+			var curHealth = $('#npc4 > #health').text();
+			curHealth -= p1Hit;
+			$('#npc4 > #health').text(curHealth);
+		}
+		$('#p3 > .dmg').text("You hit for " + p1Hit);
+		
+		if(bossHit != "MISS"){
+			var curHealth = $('#p3 > #health').text();
+			curHealth -= bossHit;
+			$('#p3 > #health').text(curHealth);
+		}
+		$('#npc4 > .dmg').text("NPC hit for " + bossHit);
+		
+	}
+	
+	
+})
+
+
+function damage(str, def, spd, dex, wdmg, wacc, armour, crit_chance, health, curHappiness, maxHappiness) {
+		var low_life_threshold = 50;
+		//var x = spd / dex * wacc / 50
+  	//var chance_to_hit = 25 + 100*x/(x+1)
+		var x = (spd/dex) * (wacc / 50);
+		var s = x / (x + 0.167);
+		var chance_to_hit =  Math.min(95, 10 + 110 * s*s*s);
+	
+		
+	  // roll for miss
+    var miss_roll = Math.random()*100;
+    if (miss_roll > chance_to_hit) {
+			missCount++;
+         return 'MISS'; // miss
+    } 
+
+    // roll base damage with random coefficient: 0.5 - 1.5
+    var dmg = ((str/def)*wdmg)*0.15 * (0.5 + 1*Math.random());
+
+    // roll for crit
+    var crit_roll = Math.random()*100;
+		//Bonus to crit for low life
+		if (health <= low_life_threshold) {
+			crit_chance = crit_chance + 50;
+			console.log('LOW LIFE CRIT!!!!');
+		}
+    if (crit_roll < crit_chance) {
+        dmg = dmg * 2; // 50% more damage on crits
+    } else {
+       // damage prevention from armour (this is ignored for crits)
+       // reduce armour depending on happiness
+       armour = armour * (1 + curHappiness / maxHappiness) / 2;
+       // calculate reduced damage 
+       dmg = dmg * (100 - armour) / 100;
+    }
+	hitCount++;
+    return Math.max(1, Math.round(dmg));
+}
+
+
+

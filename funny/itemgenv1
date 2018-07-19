@@ -1,0 +1,335 @@
+//function to generate an item based on initial item - long story short, it's pretty dope
+var clicks = 0;
+function generateItem(items, rarityIndex){
+	//console.clear();
+	clicks += 1;
+	for(var i = 0; i < $('.item').length; i++){
+		var arraySelector = Math.floor(Math.random() * (2 - 0 + 1)) + 0,
+				itemSelected = false;
+		
+		//Loop until an item is selected
+		while(!itemSelected){
+			
+			var random = Math.floor(Math.random() * ((items[arraySelector].array.length -1) - 0 + 1)) + 0;
+			var item = items[arraySelector].array[random];
+			
+			var raritySelector = Math.floor(Math.random() * (rarityIndex - 1 + 1)) + 1;
+			//console.log(raritySelector)
+			//Testing how often rare items are dropped
+			if(raritySelector == 100 && item.rarity == 100){
+				console.log(raritySelector + "==" + item.rarity + " NAME:" + item.name);
+				console.log('clicks=' + clicks);
+				clicks = 0;
+			}
+				 if(raritySelector >= item.rarity){
+//////////////////////////////////////Weapon Generator
+					 if(items[arraySelector].name == "weapons"){
+							var genWeap = {
+									damage:0,
+									accuracy:0,
+									stealth:0,
+									name:''
+								}
+							
+							genWeap.damage   = getStatBonus(item.damage);
+						  genWeap.accuracy = getStatBonus(item.accuracy);
+						  genWeap.stealth  = getStatBonus(item.stealth);
+						 
+							var originalTotal = item.damage + item.accuracy + item.stealth,
+								 newTotal      = parseFloat(genWeap.damage) + parseFloat(genWeap.accuracy) + parseFloat(genWeap.stealth);
+						 var weapType      = item.type;
+						 var descriptor = '';
+						 descriptor = getItemPhraseVariations(originalTotal, newTotal, weapType);
+						 genWeap.name     = descriptor += item.name;
+						 	$('#item' + i).html("<p class='name'>" + genWeap.name + "</p>" + "<p>damage: " + genWeap.damage + "</p> <p>accuracy: " + genWeap.accuracy + "</p> <p>stealth: " + genWeap.stealth + "</p>");
+						 //console.log(genWeap.name)
+						 itemSelected = true;
+						/*
+						END WEAPON GENERATION
+						*/
+ //////////////////////////////////////////Armor Generator
+						}
+						else if(items[arraySelector].name == "armors"){
+						  var genArmor = {
+									armor:0,
+									name:''
+								}
+							genArmor.armor = getStatBonus(item.armor);
+							var originalTotal = item.armor,
+								 newTotal      = genArmor.armor;
+						  var weapType      = item.type;
+						  var descriptor = '';
+						  descriptor = getItemPhraseVariations(originalTotal, newTotal, weapType);
+						  genArmor.name  = descriptor + " " + item.name;
+							//console.log(genArmor.name)
+						 	$('#item' + i).html( "<p class='name'>" + genArmor.name + "</p>" + "<p>Armour: " + genArmor.armor + "</p>");
+							itemSelected = true;
+					 /*
+					 END ARMOR GENERATION
+					 */
+//////////////////////////////////////////Item Generator
+					 }
+					 else if(items[arraySelector].name == "items"){
+						 var genItem = {
+									energy:0,
+									life:0,
+									nerve:0,
+									happiness:0,
+									cooldown:0,
+									name:''
+								}
+						  genItem.energy    = getStatBonus(item.energy);
+						  genItem.life      = getStatBonus(item.life);
+						  genItem.nerve     = getStatBonus(item.nerve);
+						 	genItem.happiness = getStatBonus(item.happiness);
+						  genItem.cooldown  = getStatBonus(item.cooldown);
+						  var CD2 = item.cooldown* (item.cooldown/genItem.cooldown)
+						  var originalTotal = (item.energy + item.life + item.nerve + item.happiness) + item.cooldown,
+						      newTotal      = (parseFloat(genItem.energy) + parseFloat(genItem.life) + parseFloat(genItem.nerve) + parseFloat(genItem.happiness)) + parseFloat(CD2);
+						 	var itemType      = item.type;
+						  var descriptor = '';
+						  descriptor = getItemPhraseVariations(originalTotal, newTotal, itemType);
+						  genItem.name     = descriptor += item.name;
+						  //console.log(genItem.name)
+						  $('#item' + i).html("<p class='name'>" + genItem.name + "</p>" + "<p>Energy: " + genItem.energy + "</p><p>Life: " + genItem.life + "</p><p>Nerve: " + genItem.nerve + "</p><p>Happiness: " + genItem.happiness + "</p><p>Cooldown: " + genItem.cooldown + "</p>");
+						 itemSelected = true;
+					 /*
+					 END ITEM GENERATION
+					 */
+					 }//End generation process
+				 }//End rarity comparison
+		}//End While
+	}//End For
+}//End Function
+
+
+function getStatBonus(statNumber){
+		var baseNumber;
+		if(statNumber == 0){//If base stat is 0 use 3;
+			baseNumber = 3;
+		}else{
+			baseNumber = statNumber / 5;//Divide Basestat by 5 for baseNumber
+		}
+		var statBonus = Math.round(Math.random()*baseNumber) + 1; // this will get a number between 1 and baseNumber;
+		statBonus *= Math.round(Math.random()*2) == 1 ? 1 : -1; // this will add minus sign in 50% of cases
+		var combinedStat = (statNumber + statBonus).toFixed(2);//Combine the stat and bonus
+		if(combinedStat <= 100){//If stat is less than 100 return, otherwise return 100
+			return combinedStat;
+		}else{
+			return 100;
+		}
+}
+
+function getItemPhraseVariations(prevTotal, newTotal, type){
+		var percentChange = Math.round( ( (newTotal - prevTotal) / prevTotal) * 100);
+		var textVariation = '';
+	//console.log(percentChange + "%")
+	for(var i = 0; i < arrayOfDescriptors.length; i++){
+		if(percentChange > arrayOfDescriptors[i].statlvl &&
+			type === arrayOfDescriptors[i].type){
+			textVariation = arrayOfDescriptors[i].name + " ";
+		}
+	}
+	return textVariation;
+}
+
+var arrayOfDescriptors = [
+	
+	//More of these can be created and fit within the varaiton metrics if you want more flavor
+	//Use whatever text you like this just stuff I threw together
+	{statlvl:-100, name:'Rusty', type:'melee'},
+	{statlvl:-7.5, name:'Blunt', type:'melee'},
+	{statlvl:-5, name:'Basic', type:'melee'},
+	{statlvl:5, name:'Sturdy', type:'melee'},
+	{statlvl:7.5, name:'Polished', type:'melee'},
+	{statlvl:12.5, name:'Superior', type:'melee'},
+	//Split armor types
+	{statlvl:-100, name:'Rusty', type:'armor'},
+	{statlvl:-7.5, name:'Crude', type:'armor'},
+	{statlvl:-5, name:'Basic', type:'armor'},
+	{statlvl:5, name:'Sturdy', type:'armor'},
+	{statlvl:7.5, name:'Polished', type:'armor'},
+	{statlvl:12.5, name:'Superior', type:'armor'},
+	//Split ranged types
+	{statlvl:-100, name:'Old', type:'ranged'},
+	{statlvl:-7.5, name:'Crude', type:'ranged'},
+	{statlvl:-5, name:'Basic', type:'ranged'},
+	{statlvl:5, name:'Enhanced', type:'ranged'},
+	{statlvl:7.5, name:'Combat', type:'ranged'},
+	{statlvl:12.5, name:'Tactical', type:'ranged'},
+	//Split item types
+	{statlvl:-100, name:'Rotten', type:'item'},
+	{statlvl:-7.5, name:'Old', type:'item'},
+	{statlvl:-5, name:'Plain', type:'item'},
+	{statlvl:5, name:'Fresh', type:'item'},
+	{statlvl:7.5, name:'Delicious', type:'item'},
+	{statlvl:12.5, name:'Fantastic', type:'item'}
+];
+
+//Generate Click function
+$('#generate').on('click', function() {
+	//Pass in the array of all in game items that can be chosen from, and the max-rarity of the location
+	var raidRarityChance = 100;
+	generateItem(arrayOfChoices, raidRarityChance);
+})
+
+var baseWeapons = [
+	flameThrower = {
+	damage:52,
+	accuracy:69,
+	stealth:2,
+	rarity:80,
+	type:'ranged',
+	name:'flame thrower'
+},
+	assaultRifle = {
+	damage:44,
+	accuracy:70,
+	stealth:8,
+	rarity:70,
+	type:'ranged',
+	name:'assault rifle'
+},
+	bow = {
+	damage:34,
+	accuracy:60,
+	stealth:20,
+	rarity:60,
+	type:'ranged',
+	name:'bow'
+},
+	shotgun = {
+	damage:36,
+	accuracy:65,
+	stealth:8,
+	rarity:50,
+	type:'ranged',
+	name:'Shotgun'
+},
+	spaceGun = {
+	damage:84,
+	accuracy:80,
+	stealth:8,
+	rarity:100,
+	type:'ranged',
+	name:'Space Gun'
+},
+	ZP1 = {
+	damage:96,
+	accuracy:80,
+	stealth:5,
+	rarity:100,
+	type:'ranged',
+	name:'ZP1'
+},
+	jackhammer = {
+	damage:80,
+	accuracy:50,
+	stealth:3,
+	rarity:80,
+	type:'melee',
+	name:'Jack Hammer'
+},
+	hockeyStick = {
+	damage:8,
+	accuracy:38,
+	stealth:4,
+	rarity:20,
+	type:'melee',
+	name:'Hockey Stick'
+}
+];
+
+var baseItems = [
+	bottleOfChampagne = {
+	energy:0,
+	life:0,
+	nerve:12.5,
+	happiness:8.333,
+	cooldown:50,
+	rarity:80,
+	type:'item',
+	name:'Bottle of Champagne'
+},
+	bottleOfWhisky = {
+	energy:100,
+	life:200,
+	nerve:0,
+	happiness:500,
+	cooldown:12,
+	rarity:100,
+	type:'item',
+	name:'Bottle Of Whisky'
+},
+	zPlus = {
+	energy:75,
+	life:0,
+	nerve:0,
+	happiness:25,
+	cooldown:2,
+	rarity:90,
+	type:'item',
+	name:'zPlus'
+},
+	brainJuice = {
+	energy:25,
+	life:0,
+	nerve:0,
+	happiness:25,
+	cooldown:2,
+	rarity:20,
+	type:'item',
+	name:'Brain Juice'
+},
+  espresso = {
+	energy:60,
+	life:0,
+	nerve:0,
+	happiness:0,
+	cooldown:50,
+	rarity:20,
+	type:'item',
+	name:'Espresso'
+}
+];
+
+
+var baseArmors = [
+	bulletProofVest = {
+		armor:16,
+		rarity:10,
+		type:'armor',
+		name:'Bullet Proof Vest'
+},
+	chaimailArmour = {
+		armor:34,
+		rarity:100,
+		type:'armor',
+		name:'Chaimail Armour'
+},
+	ironArmour = {
+		armor:24,
+		rarity:20,
+		type:'armor',
+		name:'Iron Armour'
+},
+	riotShield = {
+		armor:30,
+		rarity:80,
+		type:'armor',
+		name:'Riot Shield'
+},
+	stabProofVest = {
+		armor:22,
+		rarity:40,
+		type:'armor',
+		name:'Stab Proof Vest'
+}
+];
+//Arrays to hold item objects
+var arrayOfChoices = [
+	{array:baseWeapons, name:'weapons'},
+	{array:baseArmors, name:'armors'},
+	{array:baseItems, name:'items'}
+];
+

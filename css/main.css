@@ -54,4 +54,10 @@ body *{
     background: url(https://i.imgur.com/aWLOEdn.jpg);
     background-size: cover;
     background-position: center center;
+    box-shadow: 0px 5px 10px black;
+    border-radius: 5px;
+}
+
+.gatsblazing:after{
+  content:"Gatsblazing";
 }

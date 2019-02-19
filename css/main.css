@@ -12,7 +12,11 @@ RGB(136,246,246) light blue
 RGB(111,136,134) steel grey
 RGB(136,111,111) brown
 RGB(143,102,143) steel purple
-
+@font-face {
+  font-family: "terminator";
+  src: url("../fonts/terminator.ttf") format("ttf"),
+       url("../fonts/terminator.otf") format("otf");
+}
 */
 body{
   width:100vw;
@@ -38,4 +42,5 @@ body *{
     font-variant: small-caps;
     position: absolute;
     top: calc(40vh - 40px);
+    font-family: 'terminator';
 }

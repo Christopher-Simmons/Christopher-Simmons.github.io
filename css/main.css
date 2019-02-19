@@ -39,3 +39,19 @@ body *{
     top: calc(40vh - 40px);
     font-family: 'terminator_real_nfiregular';
 }
+.whatWeDo {
+    width: 100%;
+    height: 250px;
+    position: absolute;
+    top: calc(40vw + 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gatsblazing {
+    height: 240px;
+    width: 240px;
+    background: url(https://i.imgur.com/aWLOEdn.jpg);
+    background-size: cover;
+    background-position: center center;
+}

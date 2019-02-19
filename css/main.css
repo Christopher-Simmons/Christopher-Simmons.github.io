@@ -20,6 +20,10 @@ body{
   padding:0;
   margin:0;
   box-sizing:border-box;
+  background-color:#222;
+  background-image:url(https://scontent-atl3-1.xx.fbcdn.net/v/t1.0-9/1003661_143642085836979_237755537_n.jpg?_nc_cat=103&_nc_ht=scontent-atl3-1.xx&oh=fd73d9e20e9ed3bcb89ef822eefb8929&oe=5CEAC2BE);
+  background-position: center center;
+  background-size:cover;
 }
 body *{
   box-sizing:border-box;

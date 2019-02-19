@@ -43,7 +43,7 @@ body *{
     width: 100%;
     height: 250px;
     position: absolute;
-    top: calc(40vw + 60px);
+    top: calc(40vh + 40px);
     display: flex;
     justify-content: center;
     align-items: center;

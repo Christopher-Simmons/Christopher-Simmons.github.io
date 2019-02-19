@@ -36,7 +36,6 @@ body *{
     align-items: center;
     font-size: 2em;
     font-variant: small-caps;
-    background: Red;
     position: absolute;
     top: calc(40vh - 40px);
 }

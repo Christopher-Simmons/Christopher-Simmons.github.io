@@ -58,6 +58,17 @@ body *{
     border-radius: 5px;
 }
 
-.gatsblazing:after{
-  content:"Gatsblazing";
+.gatsblazing a {
+    position: absolute;
+    width: 100%;
+    height: 15%;
+    background: black;
+    bottom: 0;
+    border-radius: 0 0 5px 5px;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'terminator_real_nfiregular';
+    cursor: pointer;
 }

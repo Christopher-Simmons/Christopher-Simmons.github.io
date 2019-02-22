@@ -37,7 +37,7 @@ body *{
     font-variant: small-caps;
     position: absolute;
     top: calc(40vh - 40px);
-    font-family: 'carivale';
+    font-family: 'terminator_real_nfiregular';
 }
 .whatWeDo {
     width: 100%;
@@ -70,6 +70,6 @@ body *{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'terminator_real_nfiregular';
+    font-family: 'carivale';
     cursor: pointer;
 }

@@ -48,6 +48,12 @@ body *{
     justify-content: center;
     align-items: center;
 }
+.gatsblazing{
+    background: url(https://i.imgur.com/aWLOEdn.jpg);
+}
+.towerOfTribus{
+  background: url(https://i.pinimg.com/originals/61/5c/2f/615c2f94982ea8990843db7ed5372637.jpg);
+}
 .gatsblazing, 
 .towerOfTribus{
     height: 240px;
@@ -57,12 +63,7 @@ body *{
     box-shadow: 0px 5px 10px black;
     border-radius: 5px;
     position:relative;
-}
-.gatsblazing{
-    background: url(https://i.imgur.com/aWLOEdn.jpg);
-}
-.towerOfTribus{
-  background: url(https://i.pinimg.com/originals/61/5c/2f/615c2f94982ea8990843db7ed5372637.jpg);
+    margin:5px;
 }
 .gatsblazing a,
 .towerOfTribus a{

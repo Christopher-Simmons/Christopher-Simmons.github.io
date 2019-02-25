@@ -78,13 +78,14 @@ body *{
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: 1.5em;
     text-decoration: none;
     text-transform: lowercase;
 }
 .gatsblazing a{
     font-family: 'carnivalee_freakshowregular';
+    font-size: 1.4em;
 }
 .towerOfTribus a{
     font-family: 'terminator_real_nfiregular';
+    font-size:.8em;
 }

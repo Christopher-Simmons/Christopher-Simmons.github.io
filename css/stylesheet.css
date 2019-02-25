@@ -12,8 +12,9 @@
 }
 
 @font-face {
-    font-family: 'carivale';
-    src: url('carnevalee_freakshow.ttf') format('ttf');
+    font-family: 'carnivalee_freakshowregular';
+    src: url('carnevalee_freakshow-webfont.woff2') format('woff2'),
+         url('carnevalee_freakshow-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 

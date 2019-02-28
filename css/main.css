@@ -54,8 +54,12 @@ body *{
 .towerOfTribus{
   background: url(https://i.pinimg.com/originals/61/5c/2f/615c2f94982ea8990843db7ed5372637.jpg);
 }
+.ptmVsA{
+}
+
 .gatsblazing, 
-.towerOfTribus{
+.towerOfTribus,
+.ptmVsA{
     height: 240px;
     width: 240px;
     background-size: cover;
@@ -66,7 +70,8 @@ body *{
     margin:5px;
 }
 .gatsblazing a,
-.towerOfTribus a{
+.towerOfTribus a,
+.ptmVsA a{
     position: absolute;
     width: 100%;
     height: 15%;

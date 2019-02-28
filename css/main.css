@@ -47,6 +47,7 @@ body *{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 .gatsblazing{
     background: url(https://i.imgur.com/aWLOEdn.jpg);
@@ -55,6 +56,9 @@ body *{
   background: url(https://i.pinimg.com/originals/61/5c/2f/615c2f94982ea8990843db7ed5372637.jpg);
 }
 .ptmVsA{
+  background: url(https://i.imgur.com/dktSJvE.png);
+  background-size: 100% 100%;
+  min-width: 500px;
 }
 
 .gatsblazing, 
@@ -91,6 +95,10 @@ body *{
     font-size: 1.4em;
 }
 .towerOfTribus a{
+    font-family: 'terminator_real_nfiregular';
+    font-size:.8em;
+}
+.ptmVsA a{
     font-family: 'terminator_real_nfiregular';
     font-size:.8em;
 }

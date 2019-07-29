@@ -71,14 +71,13 @@ body *{
 .ptmVsA{
   background: url(https://i.imgur.com/dktSJvE.png);
   background-size: 100% 100%;
-  min-width: 490px;
 }
 
 .gatsblazing, 
 .towerOfTribus,
 .ptmVsA{
     height: 240px;
-    width: 240px;
+    min-width: 490px;
     background-size: cover;
     background-position: center center;
     box-shadow: 0px 5px 10px black;

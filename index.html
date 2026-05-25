@@ -1,37 +1,154 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Thunder Gun Entertainment - Built one zero at a time</title>
-		<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
-		<link rel="stylesheet" type="text/css" href="/css/stylesheet.css" type="text/css" charset="utf-8" />
-	</head>
-	<body>
-		<video autoplay="" loop="" muted="" playsinline="" preload="" poster="http://www.thundergunentertainment.com" id="video-landing">
-			<source src="https://static.videezy.com/system/resources/previews/000/013/359/original/Timelapse_Mountains_2_-_30s_-_4k_res.mp4" type="video/mp4">
-			<!--<source src="https://static.videezy.com/system/resources/previews/000/020/549/original/Schilf1.mp4" type="video/mp4">-->
-		</video>
-		<div class="saying">
-		  <h2>🚍 WE'RE ALL BOZOS ON THIS BUS 🚍</h2>
-		</div>
-		
-		<div class="whatWeDo">
-		  <div class="gatsblazing">
-		    <a href="http://www.gatsblazing.com" title="Gatsblazing">Gatsblazing</a>
-	 	  </div>
-		  <!--<div class="towerOfTribus">
-		    <a href="http://www.toweroftribus.com" title="Tower of Tribus">Tower of Tribus</a>
-	 	  </div>-->
-		  <div class="ptmVsA">
-		    <a href="http://thundergunentertainment.com/funny/ptm.html" title="(Must Enable Flash To Play)">powdered Toast Man vs The Apocalypse</a>
-	 	  </div>
-		</div>
-	
-	<script type="text/javascript" src="/js/functionality.js" ></script>
-	<script type="text/javascript" src="/js/mystify.js" ></script>
-	<script src="https://use.fontawesome.com/72037cce83.js"></script>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crush The Competition</title>
+    <style>
+        :root{
+            --dark-blue:#2E4F77;
+            --light-bluegreen:#77F4E2;
+            --dark-green:#2E7750;
+            --brown:#774F2E;
+            --steel:#6F6F88;
+        }
+        *{ box-sizing:border-box; margin:0; padding:0; }
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background:var(--dark-blue);
+            color:#f4f4f4;
+            min-height:100vh;
+        }
+
+        /* ---- Nav ---- */
+        nav{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:16px 32px;
+            background:rgba(0,0,0,0.35);
+            position:sticky;
+            top:0;
+            z-index:10;
+        }
+        nav .brand{
+            font-weight:bold;
+            font-size:1.3em;
+            color:var(--light-bluegreen);
+            letter-spacing:1px;
+        }
+        nav .links a{
+            color:#f4f4f4;
+            text-decoration:none;
+            margin-left:24px;
+            font-size:0.95em;
+        }
+        nav .links a:hover{ color:var(--light-bluegreen); }
+
+        /* ---- Hero ---- */
+        .hero{
+            text-align:center;
+            padding:90px 20px 70px;
+            background:linear-gradient(160deg, var(--dark-blue), var(--dark-green));
+        }
+        .hero h1{
+            font-size:3.2em;
+            color:var(--light-bluegreen);
+            text-shadow:0 4px 12px rgba(0,0,0,0.6);
+            letter-spacing:2px;
+        }
+        .hero p.tagline{
+            font-size:1.4em;
+            margin-top:18px;
+            color:#dcecea;
+        }
+        .hero .cta{
+            display:inline-block;
+            margin-top:34px;
+            padding:14px 38px;
+            background:var(--light-bluegreen);
+            color:var(--dark-blue);
+            font-weight:bold;
+            font-size:1.1em;
+            border-radius:6px;
+            text-decoration:none;
+            box-shadow:0 5px 14px rgba(0,0,0,0.5);
+        }
+        .hero .cta:hover{ background:#fff; }
+
+        /* ---- Features ---- */
+        .features{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:24px;
+            padding:60px 20px;
+            max-width:1000px;
+            margin:0 auto;
+        }
+        .card{
+            flex:1 1 260px;
+            max-width:300px;
+            background:rgba(0,0,0,0.25);
+            border:1px solid var(--steel);
+            border-radius:8px;
+            padding:28px;
+        }
+        .card h3{
+            color:var(--light-bluegreen);
+            margin-bottom:12px;
+            font-size:1.3em;
+        }
+        .card p{ line-height:1.6; color:#d8d8d8; }
+
+        /* ---- Footer ---- */
+        footer{
+            text-align:center;
+            padding:30px 20px;
+            background:rgba(0,0,0,0.4);
+            font-size:0.9em;
+            color:#aab;
+        }
+        footer a{ color:var(--light-bluegreen); text-decoration:none; margin:0 10px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <span class="brand">CRUSH THE COMPETITION</span>
+        <span class="links">
+            <a href="/">Home</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+        </span>
+    </nav>
+
+    <section class="hero">
+        <h1>CRUSH THE COMPETITION</h1>
+        <p class="tagline">A chaotic co-op arena brawler. Team up. Outlast the waves. Be the last crew standing.</p>
+        <a class="cta" href="#features">Learn More</a>
+    </section>
+
+    <section class="features" id="features">
+        <div class="card">
+            <h3>Online Co-Op</h3>
+            <p>Squad up with friends over the internet and take on the arena together in fast, frantic multiplayer.</p>
+        </div>
+        <div class="card">
+            <h3>Wave Survival</h3>
+            <p>Endless escalating waves push your team to the limit. Coordinate, adapt, and survive.</p>
+        </div>
+        <div class="card">
+            <h3>Built for Mayhem</h3>
+            <p>Tight twin-stick action, explosive abilities, and a whole lot of competitive chaos.</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 CrushTheCompetition &middot; Thunder Gun Entertainment
+        <br><br>
+        <a href="/privacy.html">Privacy Policy</a> |
+        <a href="/terms.html">Terms of Service</a>
+    </footer>
+</body>
 </html>
 
